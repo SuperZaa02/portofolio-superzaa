@@ -16,14 +16,14 @@ export const socialLinks: SocialLink[] = [
   },
   {
     icon: Github,
-    label: "@Farzync",
-    href: "https://github.com/Farzync",
+    label: "@SuperZaa02",
+    href: "https://github.com/SuperZaa02",
     platform: "GitHub",
   },
   {
     icon: Instagram,
-    label: "@zazaraziq",
-    href: "https://instagram.com/zazaraziq",
+    label: "@superzaa02",
+    href: "https://instagram.com/superzaa02",
     platform: "Instagram",
   },
 ];
