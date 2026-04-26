@@ -1,7 +1,7 @@
-import { Card, CardContent } from "@/components/ui/card";
-import SocialLinks from "@/components/SocialLinks";
-import { Mail } from "lucide-react";
 import { useEffect, useState } from "react";
+import AboutSection from "@/components/AboutSection";
+import ProjectsSection from "@/components/ProjectsSection";
+import ContactSection from "@/components/ContactSection";
 
 const TOPICS = [
   "Reverse Engineering",
@@ -94,50 +94,40 @@ const Index = () => {
         rel="stylesheet"
       />
 
-      <div className="flex min-h-screen flex-col items-center justify-center px-6 py-12">
-        <main className="flex flex-1 flex-col items-center justify-center text-center w-full gap-8">
-          {/* Name + subtitle */}
-          <div className="flex flex-col items-center gap-2">
-            <h1
-              className="font-heading text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight text-foreground
-                         transition-opacity duration-700 opacity-0 animate-fadeIn"
-            >
-              Faeza Raziq
-            </h1>
+      <div className="flex flex-col min-h-screen">
+        <section className="flex flex-col items-center justify-center min-h-screen px-6 py-12">
+          <main className="flex flex-col items-center justify-center text-center w-full gap-8">
+            {/* Name + subtitle */}
+            <div className="flex flex-col items-center gap-2">
+              <h1
+                className="font-heading text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight text-foreground
+                           transition-opacity duration-700 opacity-0 animate-fadeIn"
+              >
+                Faeza Raziq
+              </h1>
+              <p
+                className="text-xs sm:text-sm font-body uppercase tracking-[0.3em] text-muted-foreground
+                           transition-opacity duration-700 opacity-0 animate-fadeIn [animation-delay:200ms]"
+              >
+                Official Personal Website
+              </p>
+            </div>
+
+            {/* Tagline — lebar dibatasi, teks kecil, wrap natural */}
             <p
-              className="text-xs sm:text-sm font-body uppercase tracking-[0.3em] text-muted-foreground
-                         transition-opacity duration-700 opacity-0 animate-fadeIn [animation-delay:200ms]"
+              className="max-w-[320px] sm:max-w-[380px] text-xs sm:text-sm font-body text-muted-foreground leading-relaxed
+                         transition-opacity duration-700 opacity-0 animate-fadeIn [animation-delay:400ms]"
             >
-              Official Personal Website
+              {prefix} <TypingText start={startTyping} />
             </p>
-          </div>
+          </main>
+        </section>
 
-          {/* Tagline — lebar dibatasi, teks kecil, wrap natural */}
-          <p
-            className="max-w-[320px] sm:max-w-[380px] text-xs sm:text-sm font-body text-muted-foreground leading-relaxed
-                       transition-opacity duration-700 opacity-0 animate-fadeIn [animation-delay:400ms]"
-          >
-            {prefix} <TypingText start={startTyping} />
-          </p>
+        <AboutSection />
+        <ProjectsSection />
+        <ContactSection />
 
-          {/* Contact card */}
-          <div className="relative w-full max-w-xs transition-opacity duration-700 opacity-0 animate-fadeIn [animation-delay:600ms]">
-            <span
-              className="absolute -top-2.5 left-4 z-10 bg-background px-2 text-[11px] font-body
-                         text-muted-foreground border border-border rounded-full leading-5 flex items-center gap-1"
-            >
-              <Mail className="w-3 h-3" />
-              Contact Me
-            </span>
-            <Card className="w-full pt-3 pb-2">
-              <CardContent className="px-4 py-0">
-                <SocialLinks />
-              </CardContent>
-            </Card>
-          </div>
-        </main>
-
-        <footer className="mt-auto pt-8 pb-6 transition-opacity duration-700 opacity-0 animate-fadeIn [animation-delay:600ms]">
+        <footer className="pt-8 pb-6 text-center border-t border-border/40">
           <p className="text-xs text-muted-foreground font-body">
             &copy; {new Date().getUTCFullYear()} Faeza Raziq
           </p>

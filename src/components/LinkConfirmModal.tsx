@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { ExternalLink } from "lucide-react";
-import type { SocialLink } from "./SocialLinks";
+import type { SocialLink } from "@/data/socialsData";
 
 interface LinkConfirmModalProps {
   link: SocialLink | null;

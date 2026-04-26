@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, ReactNode } from "react";
-import type { SocialLink } from "@/components/SocialLinks";
+import type { SocialLink } from "@/data/socialsData";
 
 interface LinkConfirmModalContextProps {
   open: boolean;
