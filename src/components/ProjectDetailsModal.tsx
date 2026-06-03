@@ -16,6 +16,14 @@ import {
   Github,
   Download,
 } from "lucide-react";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import { useState } from "react";
 
 interface Props {
   project: Project;
@@ -28,6 +36,8 @@ export default function ProjectDetailsModal({
   open,
   onOpenChange,
 }: Props) {
+  const [currentSlide, setCurrentSlide] = useState(0);
+
   const { showModal } = useLinkConfirmModal();
 
   const openLink = (
@@ -127,9 +137,115 @@ export default function ProjectDetailsModal({
                 space-y-6
               "
             >
+
+              {/* SCREENSHOTS */}
+
+              {project.screenshots &&
+                project.screenshots.length > 0 && (
+                  <section className="space-y-3">
+                    <h3 className="text-sm font-medium">
+                      Screenshots
+                    </h3>
+
+                    <Carousel
+                      opts={{
+                        align: "start",
+                        loop: true,
+                      }}
+                      className="w-full"
+                      setApi={(api) => {
+                        if (!api) return;
+
+                        setCurrentSlide(api.selectedScrollSnap());
+
+                        api.on("select", () => {
+                          setCurrentSlide(
+                            api.selectedScrollSnap()
+                          );
+                        });
+                      }}
+                    >
+                      <CarouselContent>
+                        {project.screenshots.map(
+                          (image, index) => (
+                            <CarouselItem key={image}>
+                              <div
+                                className="
+                                  relative
+                                  overflow-hidden
+                                  rounded-xl
+                                  border
+                                  bg-muted/20
+                                "
+                              >
+                                <img
+                                  src={image}
+                                  alt={`${project.title} ${
+                                    index + 1
+                                  }`}
+                                  loading="lazy"
+                                  className="
+                                    w-full
+                                    aspect-[16/9]
+                                    object-cover
+                                  "
+                                />
+                              </div>
+                            </CarouselItem>
+                          )
+                        )}
+                      </CarouselContent>
+
+                      <CarouselPrevious
+                        className="
+                          left-3
+                          bg-background/80
+                          backdrop-blur
+                        "
+                      />
+
+                      <CarouselNext
+                        className="
+                          right-3
+                          bg-background/80
+                          backdrop-blur
+                        "
+                      />
+                    </Carousel>
+
+                    {/* INDICATOR */}
+
+                    <div className="flex justify-center gap-1.5">
+                      {project.screenshots.map(
+                        (_, index) => (
+                          <button
+                            key={index}
+                            type="button"
+                            className={`
+                              h-1.5
+                              rounded-full
+                              transition-all
+                              duration-300
+                              ${
+                                currentSlide === index
+                                  ? "w-6 bg-primary"
+                                  : "w-1.5 bg-muted-foreground/30"
+                              }
+                            `}
+                          />
+                        )
+                      )}
+                    </div>
+                  </section>
+                )}
+
               {/* DESCRIPTION */}
 
               <section>
+                <h3 className="text-sm font-medium">
+                  Description
+                </h3>
+
                 <p
                   className="
                     text-sm

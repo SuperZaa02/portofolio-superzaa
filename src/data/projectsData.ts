@@ -34,10 +34,22 @@ export const projects: Project[] = [
       "Reusable authentication template with modern security features.",
     description:
       "Designed and developed a reusable authentication template using Next.js and TypeScript. Implements secure user registration, login, profile management, JWT-based authentication, TOTP two-factor authentication, Google reCAPTCHA integration, and WebAuthn support. Built with maintainability and extensibility in mind.",
-    techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Prisma ORM", "PostgreSQL", "JWT", "TOTP"],
+    techStack: [
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "Prisma ORM",
+      "PostgreSQL",
+      "JWT",
+      "TOTP",
+    ],
     type: "open-source",
     role: "Full Stack Developer",
     githubLink: "https://github.com/SuperZaa02/azyqs-auth",
+    screenshots: Array.from(
+      { length: 6 },
+      (_, i) => `/assets/image/azyqs-auth/${i + 1}.png`
+    ),
     features: [
       "JWT Authentication",
       "TOTP 2FA",
@@ -45,7 +57,12 @@ export const projects: Project[] = [
       "Profile Management",
       "reCAPTCHA Integration",
     ],
-    architecture: ["Prisma ORM", "PostgreSQL", "Server Actions", "Next.js"],
+    architecture: [
+      "Prisma ORM",
+      "PostgreSQL",
+      "Server Actions",
+      "Next.js",
+    ],
   },
   // {
   //   id: "2",
@@ -68,6 +85,10 @@ export const projects: Project[] = [
     type: "closed-source",
     liveLink: "https://cbt.azyqs.my.id",
     role: "Full Stack Developer",
+    screenshots: Array.from(
+      { length: 10 },
+      (_, i) => `/assets/image/cbt-system/${i + 1}.png`
+    ),
     architecture: ["Serverless", "Prisma", "PostgreSQL"],
   },
   // {
@@ -88,6 +109,11 @@ export const projects: Project[] = [
     type: "closed-source",
     liveLink: "https://sman10bekasi.sch.id",
     role: "Backend Developer",
+    screenshots: Array.from(
+      { length: 8 },
+      (_, i) =>
+        `/assets/image/sman-10-kota-bekasi/${i + 1}.png`
+    ),
   },
   // {
   //   id: "6",
