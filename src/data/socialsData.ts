@@ -1,4 +1,4 @@
-import { Mail, Github, Instagram, type LucideIcon } from "lucide-react";
+import { Mail, Github, Instagram, Linkedin, type LucideIcon } from "lucide-react";
 
 export interface SocialLink {
   icon: LucideIcon;
@@ -26,4 +26,10 @@ export const socialLinks: SocialLink[] = [
     href: "https://instagram.com/superzaa02",
     platform: "Instagram",
   },
+  {
+    icon: Linkedin,
+    label: "Faeza Raziq",
+    href: "https://www.linkedin.com/in/faeza-raziq-b5a645393",
+    platform: "LinkedIn",
+  }
 ];
