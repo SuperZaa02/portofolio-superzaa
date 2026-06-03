@@ -2,10 +2,25 @@ export type ProjectType = "open-source" | "closed-source";
 
 export interface Project {
   id: string;
+
   title: string;
+
+  shortDescription: string;
+
   description: string;
-  techStack: string[];
+
   type: ProjectType;
+
+  role?: string;
+
+  techStack: string[];
+
+  features?: string[];
+
+  architecture?: string[];
+
+  screenshots?: string[];
+
   liveLink?: string;
   githubLink?: string;
   downloadLink?: string;
@@ -14,12 +29,23 @@ export interface Project {
 export const projects: Project[] = [
   {
     id: "1",
-    title: "Azyqs Authentication System Template",
+    title: "Azyqs Authentication System",
+    shortDescription:
+      "Reusable authentication template with modern security features.",
     description:
-      "Designed and developed a reusable authentication template from scratch using Next.js and TypeScript. Implemented secure user registration, login, profile management, JWT-based authentication, TOTP two-factor authentication, Google reCAPTCHA integration, and Webauthn Implementation following modern security best practices.",
+      "Designed and developed a reusable authentication template using Next.js and TypeScript. Implements secure user registration, login, profile management, JWT-based authentication, TOTP two-factor authentication, Google reCAPTCHA integration, and WebAuthn support. Built with maintainability and extensibility in mind.",
     techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Prisma ORM", "PostgreSQL", "JWT", "TOTP"],
     type: "open-source",
+    role: "Full Stack Developer",
     githubLink: "https://github.com/SuperZaa02/azyqs-auth",
+    features: [
+      "JWT Authentication",
+      "TOTP 2FA",
+      "WebAuthn",
+      "Profile Management",
+      "reCAPTCHA Integration",
+    ],
+    architecture: ["Prisma ORM", "PostgreSQL", "Server Actions", "Next.js"],
   },
   // {
   //   id: "2",
@@ -34,11 +60,15 @@ export const projects: Project[] = [
   {
     id: "3",
     title: "Computer-Based Testing System (CBT)",
+    shortDescription:
+      "Full-featured CBT platform for educational institutions.",
     description:
-      "Developed a complete Computer-Based Testing platform for educational institutions. Responsible for system architecture, exam management, student assessment workflows, submission tracking, automated scoring, and real-time monitoring features.",
+      "Developed a complete Computer-Based Testing platform responsible for system architecture, exam management, student assessment workflows, submission tracking, automated scoring, and real-time monitoring. The project focuses on reliability, auditability, and performance for high-concurrency exam sessions.",
     techStack: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "Server Actions", "Serverless"],
     type: "closed-source",
     liveLink: "https://cbt.azyqs.my.id",
+    role: "Full Stack Developer",
+    architecture: ["Serverless", "Prisma", "PostgreSQL"],
   },
   // {
   //   id: "4",
@@ -51,11 +81,13 @@ export const projects: Project[] = [
   {
     id: "5",
     title: "SMAN 10 Kota Bekasi Official Website",
+    shortDescription: "Official school website with CMS-focused backend features.",
     description:
-      "Led the development of the school's official website, handling the backend implementation. Built content management features, news publication workflows, information pages, and optimized performance for public access.",
+      "Led backend development for the school's official website, building content management features, news publication workflows, and performance optimizations for public access. Focused on maintainable APIs and easy content updates for non-technical staff.",
     techStack: ["Next.js", "TypeScript", "Tailwind CSS", "RESTful API"],
     type: "closed-source",
     liveLink: "https://sman10bekasi.sch.id",
+    role: "Backend Developer",
   },
   // {
   //   id: "6",

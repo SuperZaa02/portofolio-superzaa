@@ -1,190 +1,136 @@
+"use client";
+
+import React, { useState } from "react";
 import { Project } from "@/data/projectsData";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-} from "@/components/ui/card";
+import { Card, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
-  ExternalLink,
-  Github,
-  Download,
   ArrowUpRight,
   Lock,
-  type LucideIcon,
   Unlock,
 } from "lucide-react";
-import { useLinkConfirmModal } from "@/hooks/useLinkConfirmModal";
+import ProjectDetailsModal from "@/components/ProjectDetailsModal";
 
-type ProjectLink = {
-  icon: LucideIcon;
-  label: string;
-  href: string;
-  platform: string;
-};
-
-export function ProjectCard({ project }: { project: Project }) {
+export function ProjectCard({
+  project,
+}: {
+  project: Project;
+}) {
   const isOpenSource = project.type === "open-source";
-  const { showModal } = useLinkConfirmModal();
-
-  const links: ProjectLink[] = [
-    isOpenSource && project.githubLink
-      ? {
-          icon: Github,
-          label: "Source",
-          href: project.githubLink,
-          platform: "Source Code",
-        }
-      : null,
-    project.liveLink
-      ? {
-          icon: ExternalLink,
-          label: "Demo",
-          href: project.liveLink,
-          platform: "Live Demo",
-        }
-      : null,
-    project.downloadLink
-      ? {
-          icon: Download,
-          label: "Download",
-          href: project.downloadLink,
-          platform: "Download",
-        }
-      : null,
-  ].filter(Boolean) as ProjectLink[];
+  const [open, setOpen] = useState(false);
 
   return (
-    <Card
-      className="
-        group
-        flex
-        h-full
-        flex-col
-        border-border/40
-        bg-transparent
-        transition-all
-        duration-300
-        hover:-translate-y-1
-        hover:border-border/80
-      "
-    >
-      <CardHeader className="space-y-5">
-        <div className="flex items-start justify-between gap-4">
-          <h3
-            className="
-              font-heading
-              text-xl
-              font-semibold
-              tracking-tight
-              leading-tight
-              transition-transform
-              duration-300
-              group-hover:translate-x-[2px]
-            "
-          >
-            {project.title}
-          </h3>
-
-          <Badge
-            variant="outline"
-            className="
-              gap-1.5
-              text-[10px]
-              uppercase
-              tracking-[0.2em]
-              text-muted-foreground
-              border-border/50
-              bg-transparent
-              rounded-sm
-            "
-          >
-            {isOpenSource ? (
-              <Unlock size={12} />
-            ) : (
-              <Lock size={12} />
-            )}
-
-            {isOpenSource ? "Open Source" : "Proprietary"}
-          </Badge>
-        </div>
-
-        <p
-          className="
-            text-sm
-            leading-7
-            text-muted-foreground
-            line-clamp-4
-          "
-        >
-          {project.description}
-        </p>
-      </CardHeader>
-
-      <CardContent>
-        <div className="flex flex-wrap gap-x-2 gap-y-2">
-          {project.techStack.map((tech, index) => (
-            <span
-              key={tech}
-              className="text-xs text-muted-foreground"
-            >
-              {tech}
-              {index !== project.techStack.length - 1 && (
-                <span className="ml-2 opacity-30">•</span>
-              )}
-            </span>
-          ))}
-        </div>
-      </CardContent>
-
-      <CardFooter
+    <>
+      <Card
+        role="button"
+        tabIndex={0}
+        onClick={() => setOpen(true)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            setOpen(true);
+          }
+        }}
         className="
-          border-t
-          border-border/30
-          pt-4
-          flex
-          flex-wrap
-          gap-5
+          group
+          cursor-pointer
+          border-border/40
+          bg-transparent
+          transition-all
+          duration-300
+          hover:-translate-y-1
+          hover:border-border/80
         "
       >
-        {links.map(({ label, href, icon: Icon, platform }) => (
-          <button
-            key={label}
-            onClick={() =>
-              showModal({
-                icon: Icon,
-                label: project.title,
-                href,
-                platform,
-              })
-            }
+        <CardHeader className="space-y-4">
+          <div className="flex items-start justify-between gap-4">
+            <h3
+              className="
+                font-heading
+                text-xl
+                font-semibold
+                tracking-tight
+                leading-tight
+                transition-transform
+                duration-300
+                group-hover:translate-x-[2px]
+              "
+            >
+              {project.title}
+            </h3>
+
+            <Badge
+              variant="outline"
+              className="
+                gap-1.5
+                whitespace-nowrap
+                rounded-sm
+                border-border/50
+                bg-transparent
+                text-[10px]
+                uppercase
+                tracking-[0.2em]
+                text-muted-foreground
+              "
+            >
+              {isOpenSource ? (
+                <Unlock size={12} />
+              ) : (
+                <Lock size={12} />
+              )}
+
+              {isOpenSource
+                ? "Open Source"
+                : "Proprietary"}
+            </Badge>
+          </div>
+
+          <p
             className="
-              group/link
-              inline-flex
-              items-center
-              gap-1.5
-              text-xs
+              text-sm
+              leading-7
               text-muted-foreground
-              transition-colors
-              duration-200
-              hover:text-foreground
+              line-clamp-3
             "
           >
-            <span>{label}</span>
+            {project.shortDescription}
+          </p>
 
-            <ArrowUpRight
-              size={12}
+          <div className="pt-2">
+            <div
               className="
-                transition-transform
-                duration-200
-                group-hover/link:translate-x-[1px]
-                group-hover/link:-translate-y-[1px]
+                flex
+                items-center
+                justify-end
+                gap-2
+                text-sm
+                text-muted-foreground
+                transition-colors
+                duration-300
+                group-hover:text-foreground
               "
-            />
-          </button>
-        ))}
-      </CardFooter>
-    </Card>
+            >
+              <span>View Details</span>
+
+              <ArrowUpRight
+                size={14}
+                className="
+                  transition-transform
+                  duration-300
+                  group-hover:translate-x-[2px]
+                  group-hover:-translate-y-[2px]
+                "
+              />
+            </div>
+          </div>
+        </CardHeader>
+      </Card>
+
+      <ProjectDetailsModal
+        project={project}
+        open={open}
+        onOpenChange={setOpen}
+      />
+    </>
   );
 }

@@ -10,17 +10,18 @@ export default function ProjectsSection() {
         </h2>
 
         <p className="text-sm text-muted-foreground max-w-2xl leading-relaxed">
-          These are the things I&apos;ve built, ranging from open-source tools to
-          closed systems.
+          These are the things I&apos;ve built, ranging from open-source tools
+          to closed systems.
         </p>
       </div>
 
       <div
         className="
           grid
-          gap-6
           grid-cols-1
           md:grid-cols-2
+          gap-6
+          auto-rows-fr
         "
       >
         {projects.map((project) => (
