@@ -1,5 +1,6 @@
 import FooterSection from "@/components/FooterSection";
 import HoverWords from "@/components/HoverWords";
+import Reveal from "@/components/Reveal";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Compass } from "lucide-react";
@@ -10,23 +11,19 @@ const NotFound = () => {
       <main className="flex flex-1 flex-col items-center justify-center text-center max-w-xl w-full gap-16 sm:gap-20">
         {/* Header */}
         <div className="flex flex-col items-center gap-3">
-          <div className="relative flex items-center justify-center transition-opacity duration-700 opacity-0 animate-fadeIn">
-            <h1 className="font-heading text-8xl sm:text-9xl font-bold tracking-tight text-foreground z-10 select-none">
-              404
-            </h1>
-          </div>
+          <Reveal className="relative flex items-center justify-center" delay={0}>
+            <h1 className="font-heading text-8xl sm:text-9xl font-bold tracking-tight text-foreground z-10 select-none">404</h1>
+          </Reveal>
 
           <Separator />
 
-          <p className="mt-1 text-sm sm:text-base font-body uppercase tracking-[0.3em] text-muted-foreground transition-opacity duration-700 opacity-0 animate-fadeIn [animation-delay:200ms]">
-            <HoverWords>
-              Page Not Found
-            </HoverWords>
-          </p>
+          <Reveal className="mt-1 text-sm sm:text-base font-body uppercase tracking-[0.3em] text-muted-foreground" delay={0.2}>
+            <HoverWords>Page Not Found</HoverWords>
+          </Reveal>
         </div>
 
         {/* Info card — mirrors Index card block */}
-        <div className="flex justify-center w-full transition-opacity duration-700 opacity-0 animate-fadeIn [animation-delay:400ms]">
+        <Reveal className="flex justify-center w-full" delay={0.4}>
           <div className="relative w-full max-w-sm">
             {/* Floating label — same pattern as Index "Contact Me" badge */}
             <span className="absolute -top-2.5 left-4 z-10 bg-background px-2 text-[11px] font-body text-muted-foreground border border-border rounded-full leading-5 flex items-center gap-1">
@@ -46,7 +43,7 @@ const NotFound = () => {
               </CardContent>
             </Card>
           </div>
-        </div>
+        </Reveal>
       </main>
 
       <FooterSection />

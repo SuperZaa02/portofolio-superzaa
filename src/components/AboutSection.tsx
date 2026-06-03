@@ -1,35 +1,19 @@
 import HoverWords from "@/components/HoverWords";
+import Reveal from "@/components/Reveal";
 
 export default function AboutSection() {
   return (
     <section className="w-full max-w-5xl mx-auto px-6 py-24 flex flex-col gap-8">
-      <div
-        className="
-          flex flex-col gap-3
-          opacity-0 animate-fadeIn
-          [animation-delay:200ms]
-          [animation-fill-mode:forwards]
-        "
-      >
-        <h2 className="font-heading text-3xl font-bold tracking-tight text-foreground">
-          About Me
-        </h2>
+      <Reveal className="flex flex-col gap-3" delay={0.2}>
+        <h2 className="font-heading text-3xl font-bold tracking-tight text-foreground">About Me</h2>
 
         <p className="text-sm font-body text-muted-foreground max-w-2xl">
-          <HoverWords>
-            Background, perspective, and the things that drive me.
-          </HoverWords>
+          <HoverWords>Background, perspective, and the things that drive me.</HoverWords>
         </p>
-      </div>
+      </Reveal>
 
       <div className="font-body text-sm sm:text-base leading-relaxed text-muted-foreground max-w-3xl space-y-6">
-        <p
-          className="
-            opacity-0 animate-fadeIn
-            [animation-delay:400ms]
-            [animation-fill-mode:forwards]
-          "
-        >
+        <Reveal delay={0.4}>
           <HoverWords>
             Hi, I&apos;m Faeza Raziq. I tend to see the world like a system waiting
             to be understood like patterns, logic, cause and effect. Whether
@@ -37,15 +21,9 @@ export default function AboutSection() {
             people just accept at face value, I instinctively break it down, test
             the edges, and look for the most efficient path forward.
           </HoverWords>
-        </p>
+        </Reveal>
 
-        <p
-          className="
-            opacity-0 animate-fadeIn
-            [animation-delay:600ms]
-            [animation-fill-mode:forwards]
-          "
-        >
+        <Reveal delay={0.6}>
           <HoverWords>
             I&apos;m naturally drawn to complexity. There&apos;s a particular
             satisfaction in taking something dense or confusing and distilling it
@@ -53,15 +31,9 @@ export default function AboutSection() {
             or just careful thinking. I don&apos;t just want things to work; I want
             to understand <em>why</em> they work, and how they could work better.
           </HoverWords>
-        </p>
+        </Reveal>
 
-        <p
-          className="
-            opacity-0 animate-fadeIn
-            [animation-delay:800ms]
-            [animation-fill-mode:forwards]
-          "
-        >
+        <Reveal delay={0.8}>
           <HoverWords>
             I&apos;m also someone who learns best by building. Concepts don&apos;t
             fully click until I&apos;ve gotten my hands into them, experimenting,
@@ -71,7 +43,7 @@ export default function AboutSection() {
             refuse to stay in a single lane, and that&apos;s the kind of thinker
             I&apos;m always trying to become.
           </HoverWords>
-        </p>
+        </Reveal>
       </div>
     </section>
   );
