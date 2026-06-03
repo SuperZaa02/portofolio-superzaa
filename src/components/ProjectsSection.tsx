@@ -4,7 +4,14 @@ import { ProjectCard } from "./ProjectCard";
 export default function ProjectsSection() {
   return (
     <section className="w-full max-w-7xl mx-auto px-6 py-24 flex flex-col gap-14">
-      <div className="flex flex-col gap-3 items-end text-right">
+      <div
+        className="
+          flex flex-col gap-3 items-end text-right
+          opacity-0 animate-fadeIn
+          [animation-delay:200ms]
+          [animation-fill-mode:forwards]
+        "
+      >
         <h2 className="font-heading text-3xl md:text-4xl font-bold tracking-tight text-foreground">
           Projects
         </h2>
@@ -24,10 +31,11 @@ export default function ProjectsSection() {
           auto-rows-fr
         "
       >
-        {projects.map((project) => (
+        {projects.map((project, index) => (
           <ProjectCard
             key={project.id}
             project={project}
+            delay={index * 100}
           />
         ))}
       </div>
