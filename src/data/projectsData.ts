@@ -115,15 +115,18 @@ export const projects: Project[] = [
         `/assets/image/sman-10-kota-bekasi/${i + 1}.png`
     ),
   },
-  // {
-  //   id: "6",
-  //   title: "OSIS SMAN 10 Bekasi Website V2",
-  //   description:
-  //     "Redesigned and rebuilt the student organization website with a focus on user experience and maintainability. Implemented event management, announcement systems, member information management, and responsive user interfaces.",
-  //   techStack: ["TypeScript", "React", "Next.js", "Tailwind CSS"],
-  //   type: "closed-source",
-  //   liveLink: "https://osis.sman10bekasi.sch.id",
-  // },
+  {
+    id: "6",
+    title: "OSIS SMAN 10 Bekasi Website",
+    shortDescription: "Designed student organization website with improved user experience.",
+    description:
+      "Designed and built the student organization website with a focus on user experience and maintainability. Implemented event management, announcement systems, member information management, and responsive user interfaces.",
+    techStack: ["TypeScript", "React", "Next.js", "Tailwind CSS"],
+    type: "closed-source",
+    role: "Full Stack Developer",
+    screenshots: ["assets/image/others/still-developing.png"],
+    // liveLink: "https://osis.sman10bekasi.sch.id",
+  },
   // {
   //   id: "7",
   //   title: "SMAN 10 Kota Bekasi Web App (Development)",
