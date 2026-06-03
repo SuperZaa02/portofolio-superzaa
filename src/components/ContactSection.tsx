@@ -1,6 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import SocialLinks from "@/components/SocialLinks";
 import { Mail } from "lucide-react";
+import HoverWords from "@/components/HoverWords";
 
 export default function ContactSection() {
   return (
@@ -18,8 +19,10 @@ export default function ContactSection() {
         </h2>
 
         <p className="text-sm font-body text-muted-foreground max-w-md">
-          Whether you have a question, a project idea, or just want to say hi,
-          feel free to reach out. I'll get back to you as soon as possible!
+          <HoverWords>
+            Whether you have a question, a project idea, or just want to say hi,
+            feel free to reach out. I'll get back to you as soon as possible!
+          </HoverWords>
         </p>
       </div>
 
@@ -40,8 +43,10 @@ export default function ContactSection() {
             leading-5 flex items-center gap-1
           "
         >
-          <Mail className="w-3 h-3" />
-          Contact Me
+          <HoverWords>
+            <Mail className="w-3 h-3" />
+            Contact Me
+          </HoverWords>
         </span>
 
         <Card className="w-full pt-3 pb-2 border-border/40 bg-card/50 backdrop-blur-sm">

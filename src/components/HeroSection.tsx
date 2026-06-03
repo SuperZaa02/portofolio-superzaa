@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import TypingText from "@/components/TypingText";
+import HoverWords from "@/components/HoverWords";
 
 const PREFIXES = [
   "Just an ordinary teenage boy with high ambitions in",
@@ -69,7 +70,9 @@ export default function HeroSection() {
                 [animation-delay:200ms]
               "
             >
-              Official Personal Website
+              <HoverWords>
+                Official Personal Website
+              </HoverWords>
             </p>
           </div>
 
@@ -89,7 +92,9 @@ export default function HeroSection() {
               [animation-delay:400ms]
             "
           >
-            {prefix} <TypingText start={startTyping} />
+            <HoverWords>
+              {prefix} <TypingText start={startTyping} />
+            </HoverWords>
           </p>
         </main>
       </section>

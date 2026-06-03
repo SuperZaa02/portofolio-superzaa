@@ -1,5 +1,6 @@
 import { projects } from "@/data/projectsData";
 import { ProjectCard } from "./ProjectCard";
+import HoverWords from "@/components/HoverWords";
 
 export default function ProjectsSection() {
   return (
@@ -17,8 +18,10 @@ export default function ProjectsSection() {
         </h2>
 
         <p className="text-sm text-muted-foreground max-w-2xl leading-relaxed">
-          These are the things I&apos;ve built, ranging from open-source tools
-          to closed systems.
+          <HoverWords>
+            These are the things I&apos;ve built, ranging from open-source tools
+            to closed systems.
+          </HoverWords>
         </p>
       </div>
 

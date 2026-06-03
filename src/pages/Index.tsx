@@ -2,6 +2,7 @@ import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
 import ProjectsSection from "@/components/ProjectsSection";
 import ContactSection from "@/components/ContactSection";
+import HoverWords from "@/components/HoverWords";
 
 const Index = () => {
   return (
@@ -22,7 +23,9 @@ const Index = () => {
         "
       >
         <p className="font-body text-xs text-muted-foreground">
-          &copy; {new Date().getUTCFullYear()} Faeza Raziq
+          <HoverWords>
+            &copy; {new Date().getUTCFullYear()} Faeza Raziq
+          </HoverWords>
         </p>
       </footer>
     </div>
