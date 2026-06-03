@@ -1,3 +1,4 @@
+import FooterSection from "@/components/FooterSection";
 import HoverWords from "@/components/HoverWords";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
@@ -48,14 +49,7 @@ const NotFound = () => {
         </div>
       </main>
 
-      {/* Footer — identical to Index */}
-      <footer className="mt-auto pt-16 pb-8 transition-opacity duration-700 opacity-0 animate-fadeIn [animation-delay:600ms]">
-        <p className="text-xs text-muted-foreground font-body">
-          <HoverWords>
-            &copy; {new Date().getUTCFullYear()} Faeza Raziq
-          </HoverWords>
-        </p>
-      </footer>
+      <FooterSection />
     </div>
   );
 };
