@@ -24,6 +24,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { useState } from "react";
+import HoverWords from "./HoverWords";
 
 interface Props {
   project: Project;
@@ -115,7 +116,9 @@ export default function ProjectDetailsModal({
 
                 {project.role && (
                   <span className="text-sm text-muted-foreground">
-                    {project.role}
+                    <HoverWords>
+                      {project.role}
+                    </HoverWords>
                   </span>
                 )}
               </div>
@@ -253,7 +256,9 @@ export default function ProjectDetailsModal({
                     text-muted-foreground
                   "
                 >
-                  {project.description}
+                  <HoverWords>
+                    {project.description}
+                  </HoverWords>
                 </p>
               </section>
 

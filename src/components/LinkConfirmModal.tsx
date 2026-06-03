@@ -9,6 +9,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { ExternalLink } from "lucide-react";
 import type { SocialLink } from "@/data/socialsData";
+import HoverWords from "@/components/HoverWords";
 
 interface LinkConfirmModalProps {
   link: SocialLink | null;
@@ -38,10 +39,14 @@ const LinkConfirmModal = ({
       >
         <DialogHeader>
           <DialogTitle className="font-heading tracking-tight text-2xl font-bold text-foreground mb-1">
-            Leave this page?
+            <HoverWords>
+              Leave this page?
+            </HoverWords>
           </DialogTitle>
           <DialogDescription className="font-body text-sm text-muted-foreground mb-2">
-            You&apos;re about to be redirected to an external link.
+            <HoverWords>
+              You&apos;re about to be redirected to an external link.
+            </HoverWords>
           </DialogDescription>
         </DialogHeader>
 
