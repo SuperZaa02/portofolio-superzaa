@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Reveal from "@/components/Reveal";
 import { Project } from "@/data/projectsData";
 import { Card, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -23,7 +24,8 @@ export function ProjectCard({
 
   return (
     <>
-      <Card
+      <Reveal delay={delay ? delay / 1000 : 0}>
+        <Card
         role="button"
         tabIndex={0}
         onClick={() => setOpen(true)}
@@ -33,25 +35,7 @@ export function ProjectCard({
             setOpen(true);
           }
         }}
-        style={{
-          animationDelay: `${delay}ms`,
-          animationFillMode: "forwards",
-        }}
-        className="
-          groups
-          cursor-pointer
-          border-border/40
-          bg-transparent
-
-          opacity-0
-          animate-fadeIn
-
-          transition-all
-          duration-300
-
-          hover:-translate-y-1
-          hover:border-border/80
-        "
+        className="groups cursor-pointer border-border/40 bg-transparent transition-all duration-300 hover:-translate-y-1 hover:border-border/80"
       >
         <CardHeader className="space-y-4">
           <div className="flex items-start justify-between gap-4">
@@ -136,6 +120,8 @@ export function ProjectCard({
           </div>
         </CardHeader>
       </Card>
+
+      </Reveal>
 
       <ProjectDetailsModal
         project={project}

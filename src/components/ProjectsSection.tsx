@@ -1,21 +1,13 @@
 import { projects } from "@/data/projectsData";
 import { ProjectCard } from "./ProjectCard";
 import HoverWords from "@/components/HoverWords";
+import Reveal from "@/components/Reveal";
 
 export default function ProjectsSection() {
   return (
     <section className="w-full max-w-7xl mx-auto px-6 py-24 flex flex-col gap-14">
-      <div
-        className="
-          flex flex-col gap-3 items-end text-right
-          opacity-0 animate-fadeIn
-          [animation-delay:200ms]
-          [animation-fill-mode:forwards]
-        "
-      >
-        <h2 className="font-heading text-3xl md:text-4xl font-bold tracking-tight text-foreground">
-          Projects
-        </h2>
+      <Reveal className="flex flex-col gap-3 items-end text-right" delay={0.2}>
+        <h2 className="font-heading text-3xl md:text-4xl font-bold tracking-tight text-foreground">Projects</h2>
 
         <p className="text-sm text-muted-foreground max-w-2xl leading-relaxed">
           <HoverWords>
@@ -23,7 +15,7 @@ export default function ProjectsSection() {
             to closed systems.
           </HoverWords>
         </p>
-      </div>
+      </Reveal>
 
       <div
         className="

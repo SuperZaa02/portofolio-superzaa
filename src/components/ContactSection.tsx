@@ -2,18 +2,12 @@ import { Card, CardContent } from "@/components/ui/card";
 import SocialLinks from "@/components/SocialLinks";
 import { Mail } from "lucide-react";
 import HoverWords from "@/components/HoverWords";
+import Reveal from "@/components/Reveal";
 
 export default function ContactSection() {
   return (
     <section className="w-full max-w-5xl mx-auto px-6 py-24 flex flex-col gap-8 mb-20 items-center text-center">
-      <div
-        className="
-          flex flex-col gap-3 items-center
-          opacity-0 animate-fadeIn
-          [animation-delay:200ms]
-          [animation-fill-mode:forwards]
-        "
-      >
+      <Reveal className="flex flex-col gap-3 items-center" delay={0.2}>
         <h2 className="font-heading text-3xl font-bold tracking-tight text-foreground">
           Get In Touch
         </h2>
@@ -24,16 +18,9 @@ export default function ContactSection() {
             feel free to reach out. I'll get back to you as soon as possible!
           </HoverWords>
         </p>
-      </div>
+      </Reveal>
 
-      <div
-        className="
-          relative w-full max-w-xs mt-8
-          opacity-0 animate-fadeIn
-          [animation-delay:500ms]
-          [animation-fill-mode:forwards]
-        "
-      >
+      <Reveal className="relative w-full max-w-xs mt-8" delay={0.5}>
         <span
           className="
             absolute -top-2.5 left-4 z-10
@@ -54,7 +41,7 @@ export default function ContactSection() {
             <SocialLinks />
           </CardContent>
         </Card>
-      </div>
+      </Reveal>
     </section>
   );
 }

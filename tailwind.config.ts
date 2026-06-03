@@ -63,15 +63,7 @@ const config: Config = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
-      animation: {
-        fadeIn: "fadeIn 0.7s ease forwards",
-      },
-      keyframes: {
-        fadeIn: {
-          from: { opacity: "0" },
-          to: { opacity: "1" },
-        },
-      },
+      // Removed custom fadeIn keyframes/animation; using Framer Motion instead
     },
   },
   plugins: [tailwindcssAnimate],
