@@ -1,3 +1,4 @@
+import HoverWords from "@/components/HoverWords";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Compass } from "lucide-react";
@@ -17,7 +18,9 @@ const NotFound = () => {
           <Separator />
 
           <p className="mt-1 text-sm sm:text-base font-body uppercase tracking-[0.3em] text-muted-foreground transition-opacity duration-700 opacity-0 animate-fadeIn [animation-delay:200ms]">
-            Page Not Found
+            <HoverWords>
+              Page Not Found
+            </HoverWords>
           </p>
         </div>
 
@@ -34,8 +37,10 @@ const NotFound = () => {
               <CardContent className="px-5 py-0 flex flex-col gap-4">
                 {/* Message */}
                 <p className="font-body text-sm text-muted-foreground leading-relaxed">
-                  The page you're looking for doesn't exist or may have been
-                  moved or deleted.
+                  <HoverWords>
+                    The page you're looking for doesn't exist or may have been
+                    moved or deleted.
+                  </HoverWords>
                 </p>
               </CardContent>
             </Card>
@@ -46,7 +51,9 @@ const NotFound = () => {
       {/* Footer — identical to Index */}
       <footer className="mt-auto pt-16 pb-8 transition-opacity duration-700 opacity-0 animate-fadeIn [animation-delay:600ms]">
         <p className="text-xs text-muted-foreground font-body">
-          &copy; {new Date().getUTCFullYear()} Faeza Raziq
+          <HoverWords>
+            &copy; {new Date().getUTCFullYear()} Faeza Raziq
+          </HoverWords>
         </p>
       </footer>
     </div>

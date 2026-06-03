@@ -13,8 +13,10 @@ import ProjectDetailsModal from "@/components/ProjectDetailsModal";
 
 export function ProjectCard({
   project,
+  delay,
 }: {
   project: Project;
+  delay?: number;
 }) {
   const isOpenSource = project.type === "open-source";
   const [open, setOpen] = useState(false);
@@ -31,13 +33,22 @@ export function ProjectCard({
             setOpen(true);
           }
         }}
+        style={{
+          animationDelay: `${delay}ms`,
+          animationFillMode: "forwards",
+        }}
         className="
-          group
+          groups
           cursor-pointer
           border-border/40
           bg-transparent
+
+          opacity-0
+          animate-fadeIn
+
           transition-all
           duration-300
+
           hover:-translate-y-1
           hover:border-border/80
         "
