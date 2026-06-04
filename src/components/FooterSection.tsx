@@ -1,10 +1,13 @@
 import pkg from "../../package.json";
 import { motion } from "framer-motion";
 import { fadeInUp } from "@/lib/animations";
+import { useState } from "react";
+import VersionModal from "./VersionModal";
 
 const buildVersion = "v" + pkg.version + "+" + __BUILD_ID__;
 
 export default function FooterSection() {
+  const [versionModalOpen, setVersionModalOpen] = useState(false);
   return (
     <motion.footer
       variants={fadeInUp}
@@ -59,15 +62,21 @@ export default function FooterSection() {
             </p>
 
             <p
+              onClick={() => setVersionModalOpen(true)}
               className="
-                font-mono
-                text-[11px]
-                text-muted-foreground
-                sm:text-right
-              "
+              cursor-pointer
+              font-mono
+              text-[11px]
+              text-muted-foreground
+              transition-colors
+              hover:text-foreground
+              sm:text-right
+            "
             >
               {buildVersion}
             </p>
+
+            <VersionModal open={versionModalOpen} onOpenChange={setVersionModalOpen} />
           </div>
         </motion.div>
       </div>

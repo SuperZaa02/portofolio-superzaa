@@ -6,7 +6,7 @@
     "url": "https://superzaa.my.id"
   },
   "private": true,
-  "version": "2.1.2",
+  "version": "2.1.3",
   "type": "module",
   "scripts": {
     "dev": "vike dev",
