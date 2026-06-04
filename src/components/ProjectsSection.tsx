@@ -7,10 +7,7 @@ export default function ProjectsSection() {
   return (
     <section className="w-full py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-6">
-        <Reveal
-          className="mb-14 flex flex-col gap-3 text-center"
-          delay={0.2}
-        >
+        <Reveal className="mb-14 flex flex-col gap-3 text-center" delay={0.2}>
           <h2
             className="
               font-heading
@@ -36,10 +33,8 @@ export default function ProjectsSection() {
             "
           >
             <HoverWords>
-              These are the things I&apos;ve built,
-              ranging from open-source tools to
-              proprietary systems and long-term
-              personal projects.
+              These are the things I&apos;ve built, ranging from open-source tools to proprietary
+              systems and long-term personal projects.
             </HoverWords>
           </p>
         </Reveal>
@@ -52,11 +47,7 @@ export default function ProjectsSection() {
           "
         >
           {projects.map((project, index) => (
-            <ProjectCard
-              key={project.id}
-              project={project}
-              delay={index * 100}
-            />
+            <ProjectCard key={project.id} project={project} delay={index * 100} />
           ))}
         </div>
       </div>

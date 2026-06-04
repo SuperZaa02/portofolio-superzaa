@@ -1,8 +1,8 @@
-import HeroSection from "@/components/HeroSection"
-import AboutSection from "@/components/AboutSection"
-import ProjectsSection from "@/components/ProjectsSection"
-import ContactSection from "@/components/ContactSection"
-import FooterSection from "@/components/FooterSection"
+import HeroSection from "@/components/HeroSection";
+import AboutSection from "@/components/AboutSection";
+import ProjectsSection from "@/components/ProjectsSection";
+import ContactSection from "@/components/ContactSection";
+import FooterSection from "@/components/FooterSection";
 
 export function Page() {
   return (
@@ -13,5 +13,5 @@ export function Page() {
       <ContactSection />
       <FooterSection />
     </div>
-  )
+  );
 }

@@ -13,11 +13,7 @@ import GlobalLinkConfirmModal from "@/components/GlobalLinkConfirmModal";
 
 const queryClient = new QueryClient();
 
-export function Layout({
-  children,
-}: {
-  children: ReactNode;
-}) {
+export function Layout({ children }: { children: ReactNode }) {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>

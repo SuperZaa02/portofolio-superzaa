@@ -45,10 +45,7 @@ function wrapWords(text: string) {
 }
 
 function processNode(node: React.ReactNode): React.ReactNode {
-  if (
-    typeof node === "string" ||
-    typeof node === "number"
-  ) {
+  if (typeof node === "string" || typeof node === "number") {
     return wrapWords(String(node));
   }
 
@@ -61,22 +58,10 @@ function processNode(node: React.ReactNode): React.ReactNode {
     {
       ...node.props,
     },
-    React.Children.map(
-      node.props.children,
-      processNode
-    )
+    React.Children.map(node.props.children, processNode),
   );
 }
 
-export default function HoverWords({
-  children,
-}: HoverWordsProps) {
-  return (
-    <>
-      {React.Children.map(
-        children,
-        processNode
-      )}
-    </>
-  );
+export default function HoverWords({ children }: HoverWordsProps) {
+  return <>{React.Children.map(children, processNode)}</>;
 }

@@ -20,9 +20,7 @@ export default function HeroSection() {
   const [prefix, setPrefix] = useState(PREFIXES[0]);
 
   useEffect(() => {
-    setPrefix(
-      PREFIXES[Math.floor(Math.random() * PREFIXES.length)],
-    );
+    setPrefix(PREFIXES[Math.floor(Math.random() * PREFIXES.length)]);
   }, []);
 
   useEffect(() => {
@@ -96,9 +94,7 @@ export default function HeroSection() {
             viewport={{ once: true }}
             custom={0.2}
           >
-            <HoverWords>
-              Official Personal Website
-            </HoverWords>
+            <HoverWords>Official Personal Website</HoverWords>
           </motion.p>
         </div>
 
@@ -120,8 +116,7 @@ export default function HeroSection() {
           custom={0.4}
         >
           <HoverWords>
-            {prefix}{" "}
-            <TypingText start={startTyping} />
+            {prefix} <TypingText start={startTyping} />
           </HoverWords>
         </motion.p>
 

@@ -24,11 +24,7 @@ export default function SocialLinks() {
               transition-all
               duration-300
 
-              ${
-                index !== socialLinks.length - 1
-                  ? "border-b border-border/40"
-                  : ""
-              }
+              ${index !== socialLinks.length - 1 ? "border-b border-border/40" : ""}
             `}
           >
             <div className="flex items-center gap-3">

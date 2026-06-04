@@ -100,10 +100,7 @@ export default function LinkConfirmModal({
               py-2.5
             "
           >
-            <Icon
-              size={15}
-              className="text-muted-foreground"
-            />
+            <Icon size={15} className="text-muted-foreground" />
 
             <span
               className="

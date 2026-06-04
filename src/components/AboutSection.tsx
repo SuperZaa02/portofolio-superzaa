@@ -27,10 +27,7 @@ export default function AboutSection() {
         >
           {/* Content */}
           <div className="min-w-0">
-            <Reveal
-              className="flex flex-col gap-3"
-              delay={0.2}
-            >
+            <Reveal className="flex flex-col gap-3" delay={0.2}>
               <h2
                 className="
                   font-heading
@@ -53,10 +50,7 @@ export default function AboutSection() {
                   text-muted-foreground
                 "
               >
-                <HoverWords>
-                  Background, perspective, and the things
-                  that drive me.
-                </HoverWords>
+                <HoverWords>Background, perspective, and the things that drive me.</HoverWords>
               </p>
             </Reveal>
 
@@ -74,42 +68,30 @@ export default function AboutSection() {
             >
               <Reveal delay={0.4}>
                 <HoverWords>
-                  Hi, I&apos;m Faeza Raziq. I tend to see
-                  the world like a system waiting to be
-                  understood like patterns, logic, cause
-                  and effect. Whether it&apos;s a technical
-                  problem, a strategic decision, or
-                  something most people just accept at
-                  face value, I instinctively break it
-                  down, test the edges, and look for the
-                  most efficient path forward.
+                  Hi, I&apos;m Faeza Raziq. I tend to see the world like a system waiting to be
+                  understood like patterns, logic, cause and effect. Whether it&apos;s a technical
+                  problem, a strategic decision, or something most people just accept at face value,
+                  I instinctively break it down, test the edges, and look for the most efficient
+                  path forward.
                 </HoverWords>
               </Reveal>
 
               <Reveal delay={0.6}>
                 <HoverWords>
-                  I&apos;m naturally drawn to complexity.
-                  There&apos;s a particular satisfaction
-                  in taking something dense or confusing
-                  and distilling it into something clean
-                  and clear, whether that&apos;s through
-                  code, math, or just careful thinking.
-                  I don&apos;t just want things to work; I
-                  want to understand <em>why</em> they
-                  work, and how they could work better.
+                  I&apos;m naturally drawn to complexity. There&apos;s a particular satisfaction in
+                  taking something dense or confusing and distilling it into something clean and
+                  clear, whether that&apos;s through code, math, or just careful thinking. I
+                  don&apos;t just want things to work; I want to understand <em>why</em> they work,
+                  and how they could work better.
                 </HoverWords>
               </Reveal>
 
               <Reveal delay={0.8}>
                 <HoverWords>
-                  I&apos;m also someone who learns best by
-                  building. Concepts don&apos;t fully
-                  click until I&apos;ve gotten my hands
-                  into them, experimenting, breaking
-                  things, and reasoning through the
-                  results. Beyond the technical side, I
-                  care about ideas, cultural, creative,
-                  and philosophical ones too.
+                  I&apos;m also someone who learns best by building. Concepts don&apos;t fully click
+                  until I&apos;ve gotten my hands into them, experimenting, breaking things, and
+                  reasoning through the results. Beyond the technical side, I care about ideas,
+                  cultural, creative, and philosophical ones too.
                 </HoverWords>
               </Reveal>
             </div>
@@ -163,12 +145,8 @@ export default function AboutSection() {
                 src="/assets/image/others/about-me.png"
                 alt="About Me Illustration"
                 draggable={false}
-                onDragStart={(e) =>
-                  e.preventDefault()
-                }
-                onContextMenu={(e) =>
-                  e.preventDefault()
-                }
+                onDragStart={(e) => e.preventDefault()}
+                onContextMenu={(e) => e.preventDefault()}
                 animate={{
                   y: [0, -10, 0],
                 }}

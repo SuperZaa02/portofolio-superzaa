@@ -12,12 +12,7 @@ const GlobalLinkConfirmModal = () => {
   };
 
   return (
-    <LinkConfirmModal
-      link={link}
-      open={open}
-      onConfirm={handleConfirm}
-      onCancel={hideModal}
-    />
+    <LinkConfirmModal link={link} open={open} onConfirm={handleConfirm} onCancel={hideModal} />
   );
 };
 

@@ -19,10 +19,6 @@ export function Page() {
         : "An unexpected error occurred, please try again later.";
 
   return (
-    <ErrorPage
-      code={pageContext.is404 ? 404 : 500}
-      title={errorTitle}
-      message={errorMessage}
-    />
+    <ErrorPage code={pageContext.is404 ? 404 : 500} title={errorTitle} message={errorMessage} />
   );
 }

@@ -4,8 +4,7 @@ import { motion } from "framer-motion";
 
 import { fadeInUp } from "@/lib/animations";
 
-const buildVersion =
-  "v" + pkg.version + "+" + __BUILD_ID__;
+const buildVersion = "v" + pkg.version + "+" + __BUILD_ID__;
 
 export default function FooterSection() {
   return (
@@ -43,10 +42,7 @@ export default function FooterSection() {
             text-muted-foreground
           "
         >
-          <HoverWords>
-            © {new Date().getUTCFullYear()} Faeza
-            Raziq
-          </HoverWords>
+          <HoverWords>© {new Date().getUTCFullYear()} Faeza Raziq</HoverWords>
         </p>
 
         <p

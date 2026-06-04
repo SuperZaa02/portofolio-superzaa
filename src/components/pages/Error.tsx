@@ -13,11 +13,14 @@ type ErrorPageProps = {
   showFooter?: boolean;
 };
 
-function ErrorPage({ code = 404, title = "Page Not Found", message, showFooter = true }: ErrorPageProps) {
+function ErrorPage({
+  code = 404,
+  title = "Page Not Found",
+  message,
+  showFooter = true,
+}: ErrorPageProps) {
   const defaultMessage = (
-    <>
-      The page you're looking for doesn't exist or may have been moved or deleted.
-    </>
+    <>The page you're looking for doesn't exist or may have been moved or deleted.</>
   );
 
   return (
@@ -26,12 +29,17 @@ function ErrorPage({ code = 404, title = "Page Not Found", message, showFooter =
         {/* Header */}
         <div className="flex flex-col items-center gap-3">
           <Reveal className="relative flex items-center justify-center" delay={0}>
-            <h1 className="font-heading text-8xl sm:text-9xl font-bold tracking-tight text-foreground z-10 select-none">{code}</h1>
+            <h1 className="font-heading text-8xl sm:text-9xl font-bold tracking-tight text-foreground z-10 select-none">
+              {code}
+            </h1>
           </Reveal>
 
           <Separator />
 
-          <Reveal className="mt-1 text-sm sm:text-base font-body uppercase tracking-[0.3em] text-muted-foreground" delay={0.2}>
+          <Reveal
+            className="mt-1 text-sm sm:text-base font-body uppercase tracking-[0.3em] text-muted-foreground"
+            delay={0.2}
+          >
             <HoverWords>{title}</HoverWords>
           </Reveal>
         </div>
@@ -49,9 +57,7 @@ function ErrorPage({ code = 404, title = "Page Not Found", message, showFooter =
               <CardContent className="px-5 py-0 flex flex-col gap-4">
                 {/* Message */}
                 <p className="font-body text-sm text-muted-foreground leading-relaxed">
-                  <HoverWords>
-                    {message ?? defaultMessage}
-                  </HoverWords>
+                  <HoverWords>{message ?? defaultMessage}</HoverWords>
                 </p>
               </CardContent>
             </Card>

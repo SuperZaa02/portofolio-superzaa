@@ -14,17 +14,12 @@ interface TypingTextProps {
   start: boolean;
 }
 
-export default function TypingText({
-  start,
-}: TypingTextProps) {
+export default function TypingText({ start }: TypingTextProps) {
   const [topicIndex, setTopicIndex] = useState(0);
 
-  const [displayed, setDisplayed] =
-    useState("");
+  const [displayed, setDisplayed] = useState("");
 
-  const [phase, setPhase] = useState<
-    "typing" | "hold" | "erasing"
-  >("typing");
+  const [phase, setPhase] = useState<"typing" | "hold" | "erasing">("typing");
 
   useEffect(() => {
     if (!start) return;
@@ -34,12 +29,7 @@ export default function TypingText({
     if (phase === "typing") {
       if (displayed.length < current.length) {
         const timeout = setTimeout(() => {
-          setDisplayed(
-            current.slice(
-              0,
-              displayed.length + 1,
-            ),
-          );
+          setDisplayed(current.slice(0, displayed.length + 1));
         }, 70);
 
         return () => clearTimeout(timeout);
@@ -63,32 +53,22 @@ export default function TypingText({
     if (phase === "erasing") {
       if (displayed.length > 0) {
         const timeout = setTimeout(() => {
-          setDisplayed(
-            displayed.slice(0, -1),
-          );
+          setDisplayed(displayed.slice(0, -1));
         }, 40);
 
         return () => clearTimeout(timeout);
       }
 
-      setTopicIndex(
-        (prev) => (prev + 1) % TOPICS.length,
-      );
+      setTopicIndex((prev) => (prev + 1) % TOPICS.length);
 
       setPhase("typing");
     }
-  }, [
-    displayed,
-    phase,
-    topicIndex,
-    start,
-  ]);
+  }, [displayed, phase, topicIndex, start]);
 
   return (
     <span
       style={{
-        fontFamily:
-          "'Courier Prime', monospace",
+        fontFamily: "'Courier Prime', monospace",
       }}
       className="
         inline-flex

@@ -1,11 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import {
-  ArrowUpRight,
-  Lock,
-  Unlock,
-} from "lucide-react";
+import { ArrowUpRight, Lock, Unlock } from "lucide-react";
 
 import Reveal from "@/components/Reveal";
 import ProjectDetailsModal from "@/components/ProjectDetailsModal";
@@ -13,24 +9,17 @@ import ProjectDetailsModal from "@/components/ProjectDetailsModal";
 import { Project } from "@/data/projectsData";
 
 import { Badge } from "@/components/ui/badge";
-import {
-  Card,
-  CardHeader,
-} from "@/components/ui/card";
+import { Card, CardHeader } from "@/components/ui/card";
 
 interface ProjectCardProps {
   project: Project;
   delay?: number;
 }
 
-export function ProjectCard({
-  project,
-  delay,
-}: ProjectCardProps) {
+export function ProjectCard({ project, delay }: ProjectCardProps) {
   const [open, setOpen] = useState(false);
 
-  const isOpenSource =
-    project.type === "open-source";
+  const isOpenSource = project.type === "open-source";
 
   return (
     <>
@@ -40,10 +29,7 @@ export function ProjectCard({
           tabIndex={0}
           onClick={() => setOpen(true)}
           onKeyDown={(e) => {
-            if (
-              e.key === "Enter" ||
-              e.key === " "
-            ) {
+            if (e.key === "Enter" || e.key === " ") {
               e.preventDefault();
               setOpen(true);
             }
@@ -83,15 +69,9 @@ export function ProjectCard({
                   text-muted-foreground
                 "
               >
-                {isOpenSource ? (
-                  <Unlock size={12} />
-                ) : (
-                  <Lock size={12} />
-                )}
+                {isOpenSource ? <Unlock size={12} /> : <Lock size={12} />}
 
-                {isOpenSource
-                  ? "Open Source"
-                  : "Proprietary"}
+                {isOpenSource ? "Open Source" : "Proprietary"}
               </Badge>
 
               <h3
@@ -137,9 +117,7 @@ export function ProjectCard({
                   group-hover:text-foreground
                 "
               >
-                <span>
-                  Explore Project
-                </span>
+                <span>Explore Project</span>
 
                 <ArrowUpRight
                   size={15}
@@ -181,11 +159,7 @@ export function ProjectCard({
         </Card>
       </Reveal>
 
-      <ProjectDetailsModal
-        project={project}
-        open={open}
-        onOpenChange={setOpen}
-      />
+      <ProjectDetailsModal project={project} open={open} onOpenChange={setOpen} />
     </>
   );
 }

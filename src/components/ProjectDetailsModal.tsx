@@ -1,22 +1,11 @@
 "use client";
 
 import { Project } from "@/data/projectsData";
-import {
-  Dialog,
-  DialogContent,
-  DialogTitle,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useLinkConfirmModal } from "@/hooks/useLinkConfirmModal";
-import {
-  ArrowUpRight,
-  Check,
-  ExternalLink,
-  Github,
-  Download,
-  X
-} from "lucide-react";
+import { ArrowUpRight, Check, ExternalLink, Github, Download, X } from "lucide-react";
 import {
   Carousel,
   CarouselContent,
@@ -34,21 +23,13 @@ interface Props {
   onOpenChange: (open: boolean) => void;
 }
 
-export default function ProjectDetailsModal({
-  project,
-  open,
-  onOpenChange,
-}: Props) {
+export default function ProjectDetailsModal({ project, open, onOpenChange }: Props) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [previewImage, setPreviewImage] = useState<string | null>(null);
 
   const { showModal } = useLinkConfirmModal();
 
-  const openLink = (
-    href?: string,
-    platform?: string,
-    icon = ExternalLink
-  ) => {
+  const openLink = (href?: string, platform?: string, icon = ExternalLink) => {
     if (!href) return;
 
     showModal({
@@ -61,10 +42,7 @@ export default function ProjectDetailsModal({
 
   return (
     <>
-      <Dialog
-        open={open}
-        onOpenChange={onOpenChange}
-      >
+      <Dialog open={open} onOpenChange={onOpenChange}>
         <DialogContent
           className="
             p-0
@@ -80,9 +58,7 @@ export default function ProjectDetailsModal({
             max-h-[90vh]
           "
         >
-          <DialogTitle className="sr-only">
-            {project.title}
-          </DialogTitle>
+          <DialogTitle className="sr-only">{project.title}</DialogTitle>
 
           <motion.div
             initial={{
@@ -142,9 +118,7 @@ export default function ProjectDetailsModal({
                       tracking-wider
                     "
                   >
-                    {project.type === "open-source"
-                      ? "Open Source"
-                      : "Proprietary"}
+                    {project.type === "open-source" ? "Open Source" : "Proprietary"}
                   </Badge>
 
                   {project.role && (
@@ -171,95 +145,86 @@ export default function ProjectDetailsModal({
                   space-y-6
                 "
               >
-
                 {/* SCREENSHOTS */}
-                {project.screenshots &&
-                  project.screenshots.length > 0 && (
-                    <section className="space-y-3">
-                      <h3 className="text-sm font-medium">
-                        Screenshots
-                      </h3>
+                {project.screenshots && project.screenshots.length > 0 && (
+                  <section className="space-y-3">
+                    <h3 className="text-sm font-medium">Screenshots</h3>
 
-                      <Carousel
-                        opts={{
-                          align: "start",
-                          loop: true,
-                        }}
-                        className="w-full"
-                        setApi={(api) => {
-                          if (!api) return;
+                    <Carousel
+                      opts={{
+                        align: "start",
+                        loop: true,
+                      }}
+                      className="w-full"
+                      setApi={(api) => {
+                        if (!api) return;
 
+                        setCurrentSlide(api.selectedScrollSnap());
+
+                        api.on("select", () => {
                           setCurrentSlide(api.selectedScrollSnap());
-
-                          api.on("select", () => {
-                            setCurrentSlide(
-                              api.selectedScrollSnap()
-                            );
-                          });
-                        }}
-                      >
-                        <CarouselContent>
-                          {project.screenshots.map(
-                            (image, index) => (
-                              <CarouselItem key={image}>
-                                <div
-                                  className="
+                        });
+                      }}
+                    >
+                      <CarouselContent>
+                        {project.screenshots.map((image, index) => (
+                          <CarouselItem key={image}>
+                            <div
+                              className="
                                     relative
                                     overflow-hidden
                                     rounded-xl
                                     border
                                     bg-muted/20
                                   "
-                                >
-                                  <motion.img
-                                    src={image}
-                                    alt={`${project.title} ${index + 1}`}
-                                    loading="lazy"
-                                    onClick={() => setPreviewImage(image)}
-                                    whileHover={{
-                                      scale: 1.015,
-                                    }}
-                                    transition={{
-                                      duration: 0.2,
-                                    }}
-                                    className="
+                            >
+                              <motion.img
+                                src={image}
+                                alt={`${project.title} ${index + 1}`}
+                                loading="lazy"
+                                onClick={() => setPreviewImage(image)}
+                                whileHover={{
+                                  scale: 1.015,
+                                }}
+                                transition={{
+                                  duration: 0.2,
+                                }}
+                                className="
                                       w-full
                                       aspect-[16/9]
                                       object-cover
                                       cursor-pointer
                                     "
-                                  />
-                                </div>
-                              </CarouselItem>
-                            )
-                          )}
-                        </CarouselContent>
+                              />
+                            </div>
+                          </CarouselItem>
+                        ))}
+                      </CarouselContent>
 
-                        <CarouselPrevious
-                          className="
+                      <CarouselPrevious
+                        className="
                             left-3
                             bg-background/80
                             backdrop-blur
                           "
-                        />
+                      />
 
-                        <CarouselNext
-                          className="
+                      <CarouselNext
+                        className="
                             right-3
                             bg-background/80
                             backdrop-blur
                           "
-                        />
-                      </Carousel>
+                      />
+                    </Carousel>
 
-                      {/* INDICATOR */}
-                      <div className="flex justify-center gap-1.5">
-                        {project.screenshots.map(
-                          (_, index) => (
-                            <button
-                              key={index}
-                              type="button"
-                              className={`
+                    {/* INDICATOR */}
+                    <div className="flex justify-center gap-1.5">
+                      {project.screenshots.map((_, index) => (
+                        <button
+                          key={index}
+                          type="button"
+                          className={`
                                 h-1.5
                                 rounded-full
                                 transition-all
@@ -270,18 +235,15 @@ export default function ProjectDetailsModal({
                                     : "w-1.5 bg-muted-foreground/30"
                                 }
                               `}
-                            />
-                          )
-                        )}
-                      </div>
-                    </section>
-                  )}
+                        />
+                      ))}
+                    </div>
+                  </section>
+                )}
 
                 {/* DESCRIPTION */}
                 <section>
-                  <h3 className="text-sm font-medium">
-                    Description
-                  </h3>
+                  <h3 className="text-sm font-medium">Description</h3>
 
                   <p
                     className="
@@ -290,17 +252,13 @@ export default function ProjectDetailsModal({
                       text-muted-foreground
                     "
                   >
-                    <HoverWords>
-                      {project.description}
-                    </HoverWords>
+                    <HoverWords>{project.description}</HoverWords>
                   </p>
                 </section>
 
                 {/* TECH STACK */}
                 <section className="space-y-3">
-                  <h3 className="text-sm font-medium">
-                    Tech Stack
-                  </h3>
+                  <h3 className="text-sm font-medium">Tech Stack</h3>
 
                   <div className="flex flex-wrap gap-2">
                     {project.techStack.map((tech) => (
@@ -321,67 +279,61 @@ export default function ProjectDetailsModal({
                 </section>
 
                 {/* FEATURES */}
-                {project.features &&
-                  project.features.length > 0 && (
-                    <section className="space-y-3">
-                      <h3 className="text-sm font-medium">
-                        Key Features
-                      </h3>
+                {project.features && project.features.length > 0 && (
+                  <section className="space-y-3">
+                    <h3 className="text-sm font-medium">Key Features</h3>
 
-                      <div className="grid gap-3 sm:grid-cols-2">
-                        {project.features.map((feature) => (
-                          <div
-                            key={feature}
-                            className="
+                    <div className="grid gap-3 sm:grid-cols-2">
+                      {project.features.map((feature) => (
+                        <div
+                          key={feature}
+                          className="
                               flex
                               items-start
                               gap-2
                               text-sm
                               text-muted-foreground
                             "
-                          >
-                            <Check
-                              size={14}
-                              className="
+                        >
+                          <Check
+                            size={14}
+                            className="
                                 shrink-0
                                 mt-1
                                 text-primary
                               "
-                            />
+                          />
 
-                            <span>{feature}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </section>
-                  )}
+                          <span>{feature}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </section>
+                )}
 
                 {/* ARCHITECTURE */}
-                {project.architecture &&
-                  project.architecture.length > 0 && (
-                    <section className="space-y-3">
-                      <h3 className="text-sm font-medium">
-                        Architecture
-                      </h3>
+                {project.architecture && project.architecture.length > 0 && (
+                  <section className="space-y-3">
+                    <h3 className="text-sm font-medium">Architecture</h3>
 
-                      <div className="flex flex-wrap gap-2">
-                        {project.architecture.map((item) => (
-                          <Badge
-                            key={item}
-                            variant="outline"
-                            className="
+                    <div className="flex flex-wrap gap-2">
+                      {project.architecture.map((item) => (
+                        <Badge
+                          key={item}
+                          variant="outline"
+                          className="
                               h-7
                               rounded-md
                               px-3
                               text-xs
                             "
-                          >
-                            {item}
-                          </Badge>
-                        ))}
-                      </div>
-                    </section>
-                  )}
+                        >
+                          {item}
+                        </Badge>
+                      ))}
+                    </div>
+                  </section>
+                )}
               </div>
             </div>
 
@@ -398,13 +350,7 @@ export default function ProjectDetailsModal({
                   <Button
                     variant="ghost"
                     size="sm"
-                    onClick={() =>
-                      openLink(
-                        project.githubLink,
-                        "Source Code",
-                        Github
-                      )
-                    }
+                    onClick={() => openLink(project.githubLink, "Source Code", Github)}
                     className="
                       group
                       h-auto
@@ -417,7 +363,6 @@ export default function ProjectDetailsModal({
                     "
                   >
                     Source Code
-
                     <ArrowUpRight
                       size={14}
                       className="
@@ -435,12 +380,7 @@ export default function ProjectDetailsModal({
                   <Button
                     variant="ghost"
                     size="sm"
-                    onClick={() =>
-                      openLink(
-                        project.liveLink,
-                        "Live Demo"
-                      )
-                    }
+                    onClick={() => openLink(project.liveLink, "Live Demo")}
                     className="
                       group
                       h-auto
@@ -453,7 +393,6 @@ export default function ProjectDetailsModal({
                     "
                   >
                     Live Demo
-
                     <ArrowUpRight
                       size={14}
                       className="
@@ -471,13 +410,7 @@ export default function ProjectDetailsModal({
                   <Button
                     variant="ghost"
                     size="sm"
-                    onClick={() =>
-                      openLink(
-                        project.downloadLink,
-                        "Download",
-                        Download
-                      )
-                    }
+                    onClick={() => openLink(project.downloadLink, "Download", Download)}
                     className="
                       group
                       h-auto
@@ -490,7 +423,6 @@ export default function ProjectDetailsModal({
                     "
                   >
                     Download
-
                     <ArrowUpRight
                       size={14}
                       className="
@@ -525,9 +457,7 @@ export default function ProjectDetailsModal({
             w-auto
           "
         >
-          <DialogTitle className="sr-only">
-            Image Preview
-          </DialogTitle>
+          <DialogTitle className="sr-only">Image Preview</DialogTitle>
 
           <button
             onClick={() => setPreviewImage(null)}

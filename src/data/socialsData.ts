@@ -31,5 +31,5 @@ export const socialLinks: SocialLink[] = [
     label: "Faeza Raziq",
     href: "https://www.linkedin.com/in/faeza-raziq-b5a645393",
     platform: "LinkedIn",
-  }
+  },
 ];

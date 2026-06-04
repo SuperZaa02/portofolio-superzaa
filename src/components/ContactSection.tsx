@@ -9,10 +9,7 @@ export default function ContactSection() {
     <section className="w-full py-24 lg:py-32">
       <div className="mx-auto max-w-5xl px-6">
         <div className="flex flex-col items-center text-center">
-          <Reveal
-            className="flex flex-col items-center gap-4"
-            delay={0.2}
-          >
+          <Reveal className="flex flex-col items-center gap-4" delay={0.2}>
             <h2
               className="
                 font-heading
@@ -37,18 +34,13 @@ export default function ContactSection() {
               "
             >
               <HoverWords>
-                Whether you have a question, an
-                interesting project, a collaboration
-                opportunity, or simply want to say
-                hello, my inbox is always open.
+                Whether you have a question, an interesting project, a collaboration opportunity, or
+                simply want to say hello, my inbox is always open.
               </HoverWords>
             </p>
           </Reveal>
 
-          <Reveal
-            className="mt-12 w-full max-w-xl"
-            delay={0.5}
-          >
+          <Reveal className="mt-12 w-full max-w-xl" delay={0.5}>
             <Card
               className="
                 relative

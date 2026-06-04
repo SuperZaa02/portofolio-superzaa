@@ -7,9 +7,7 @@ export async function data(pageContext: PageContextServer) {
   const is404 = pageContext.is404;
 
   useConfig()({
-    title: is404
-      ? "404 - Page Not Found | SuperZaa"
-      : "500 - Internal Server Error | SuperZaa",
+    title: is404 ? "404 - Page Not Found | SuperZaa" : "500 - Internal Server Error | SuperZaa",
 
     description: is404
       ? "The page you are looking for could not be found. It may have been moved, renamed, or deleted."
