@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export default function AboutSection() {
   return (
-    <section className="w-full py-20 sm:py-24 lg:py-32">
+    <section id="about" className="w-full py-20 sm:py-24 lg:py-32">
       <div
         className="
           mx-auto

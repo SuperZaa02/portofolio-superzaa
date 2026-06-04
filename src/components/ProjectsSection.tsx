@@ -5,11 +5,12 @@ import { ProjectCard } from "./ProjectCard";
 
 export default function ProjectsSection() {
   return (
-    <section className="w-full py-24 lg:py-32">
+    <section id="projects" className="w-full py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-6">
-        <Reveal className="mb-14 flex flex-col gap-3 text-center" delay={0.2}>
+        <Reveal className="mb-14 flex flex-col items-end gap-3" delay={0.2}>
           <h2
             className="
+              text-right
               font-heading
               text-3xl
               sm:text-4xl
@@ -24,8 +25,8 @@ export default function ProjectsSection() {
 
           <p
             className="
-              mx-auto
               max-w-2xl
+              text-right
               text-sm
               sm:text-base
               leading-relaxed

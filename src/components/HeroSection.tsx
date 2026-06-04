@@ -126,9 +126,6 @@ export default function HeroSection() {
             flex-wrap
             justify-center
             gap-3
-            text-xs
-            sm:text-sm
-            text-muted-foreground
           "
           variants={fadeInUp}
           initial="hidden"
@@ -136,11 +133,59 @@ export default function HeroSection() {
           viewport={{ once: true }}
           custom={0.6}
         >
-          <span>Backend Developer</span>
-          <span>•</span>
-          <span>Cyber Security Enthusiast</span>
-          <span>•</span>
-          <span>Open Source Contributor</span>
+          <a
+            href="#about"
+            className="
+              rounded-full
+              border
+              border-border
+              px-5
+              py-2
+              text-sm
+              font-medium
+              transition-all
+              hover:border-primary
+              hover:text-primary
+            "
+          >
+            About Me
+          </a>
+
+          <a
+            href="#projects"
+            className="
+              rounded-full
+              border
+              border-border
+              px-5
+              py-2
+              text-sm
+              font-medium
+              transition-all
+              hover:border-primary
+              hover:text-primary
+            "
+          >
+            View Projects
+          </a>
+
+          <a
+            href="#contact"
+            className="
+              rounded-full
+              border
+              border-border
+              px-5
+              py-2
+              text-sm
+              font-medium
+              transition-all
+              hover:border-primary
+              hover:text-primary
+            "
+          >
+            Contact Me
+          </a>
         </motion.div>
       </main>
     </section>

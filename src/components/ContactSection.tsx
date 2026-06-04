@@ -6,7 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 
 export default function ContactSection() {
   return (
-    <section className="w-full py-24 lg:py-32">
+    <section id="contact" className="w-full py-24 lg:py-32">
       <div className="mx-auto max-w-5xl px-6">
         <div className="flex flex-col items-center text-center">
           <Reveal className="flex flex-col items-center gap-4" delay={0.2}>

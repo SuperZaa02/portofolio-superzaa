@@ -85,6 +85,7 @@ export function ProjectCard({ project, delay }: ProjectCardProps) {
                   transition-transform
                   duration-300
                   group-hover:translate-x-[2px]
+                  line-clamp-1
                 "
               >
                 {project.title}
@@ -96,7 +97,7 @@ export function ProjectCard({ project, delay }: ProjectCardProps) {
                   sm:text-base
                   leading-relaxed
                   text-muted-foreground
-                  line-clamp-4
+                  line-clamp-2
                 "
               >
                 {project.shortDescription}
