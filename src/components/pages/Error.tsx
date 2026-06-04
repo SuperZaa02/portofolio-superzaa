@@ -49,7 +49,9 @@ function ErrorPage({ code = 404, title = "Page Not Found", message, showFooter =
               <CardContent className="px-5 py-0 flex flex-col gap-4">
                 {/* Message */}
                 <p className="font-body text-sm text-muted-foreground leading-relaxed">
-                  {message ?? defaultMessage}
+                  <HoverWords>
+                    {message ?? defaultMessage}
+                  </HoverWords>
                 </p>
               </CardContent>
             </Card>

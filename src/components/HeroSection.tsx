@@ -17,9 +17,13 @@ const PREFIXES = [
 export default function HeroSection() {
   const [startTyping, setStartTyping] = useState(false);
 
-  const [prefix] = useState(
-    () => PREFIXES[Math.floor(Math.random() * PREFIXES.length)],
-  );
+  const [prefix, setPrefix] = useState(PREFIXES[0]);
+
+  useEffect(() => {
+    setPrefix(
+      PREFIXES[Math.floor(Math.random() * PREFIXES.length)]
+    );
+  }, []);
 
   useEffect(() => {
     const t = setTimeout(() => {
