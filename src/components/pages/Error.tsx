@@ -1,3 +1,4 @@
+import React from "react";
 import FooterSection from "@/components/FooterSection";
 import HoverWords from "@/components/HoverWords";
 import Reveal from "@/components/Reveal";
@@ -5,20 +6,33 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Compass } from "lucide-react";
 
-const NotFound = () => {
+type ErrorPageProps = {
+  code?: string | number;
+  title?: string;
+  message?: React.ReactNode;
+  showFooter?: boolean;
+};
+
+function ErrorPage({ code = 404, title = "Page Not Found", message, showFooter = true }: ErrorPageProps) {
+  const defaultMessage = (
+    <>
+      The page you're looking for doesn't exist or may have been moved or deleted.
+    </>
+  );
+
   return (
     <div className="flex min-h-screen flex-col items-center justify-center px-6 py-16">
       <main className="flex flex-1 flex-col items-center justify-center text-center max-w-xl w-full gap-16 sm:gap-20">
         {/* Header */}
         <div className="flex flex-col items-center gap-3">
           <Reveal className="relative flex items-center justify-center" delay={0}>
-            <h1 className="font-heading text-8xl sm:text-9xl font-bold tracking-tight text-foreground z-10 select-none">404</h1>
+            <h1 className="font-heading text-8xl sm:text-9xl font-bold tracking-tight text-foreground z-10 select-none">{code}</h1>
           </Reveal>
 
           <Separator />
 
           <Reveal className="mt-1 text-sm sm:text-base font-body uppercase tracking-[0.3em] text-muted-foreground" delay={0.2}>
-            <HoverWords>Page Not Found</HoverWords>
+            <HoverWords>{title}</HoverWords>
           </Reveal>
         </div>
 
@@ -35,10 +49,7 @@ const NotFound = () => {
               <CardContent className="px-5 py-0 flex flex-col gap-4">
                 {/* Message */}
                 <p className="font-body text-sm text-muted-foreground leading-relaxed">
-                  <HoverWords>
-                    The page you're looking for doesn't exist or may have been
-                    moved or deleted.
-                  </HoverWords>
+                  {message ?? defaultMessage}
                 </p>
               </CardContent>
             </Card>
@@ -46,9 +57,10 @@ const NotFound = () => {
         </Reveal>
       </main>
 
-      <FooterSection />
+      {showFooter && <FooterSection />}
     </div>
   );
-};
+}
 
-export default NotFound;
+export { ErrorPage };
+export default ErrorPage;
