@@ -23,13 +23,17 @@ function wrapWords(text: string) {
           cursor-default
           transition-colors
           duration-200
-          hover:text-foreground
           will-change-transform
         "
         whileHover={{
           y: -2,
-          scale: 1.03,
+          scale: 1.06,
           rotate: currentWordIndex % 2 === 0 ? -2 : 2,
+          color: "hsl(var(--primary))",
+          textShadow: `
+            0 0 8px hsl(var(--primary) / 0.5),
+            0 0 16px hsl(var(--primary) / 0.3)
+          `,
         }}
         transition={{
           type: "spring",
