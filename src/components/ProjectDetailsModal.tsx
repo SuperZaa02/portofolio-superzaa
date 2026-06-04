@@ -26,6 +26,7 @@ import {
 } from "@/components/ui/carousel";
 import { useState } from "react";
 import HoverWords from "./HoverWords";
+import { motion } from "framer-motion";
 
 interface Props {
   project: Project;
@@ -68,8 +69,14 @@ export default function ProjectDetailsModal({
           className="
             p-0
             overflow-hidden
-            sm:max-w-2xl
-            lg:max-w-3xl
+
+            border-border/40
+            bg-background/95
+            backdrop-blur-xl
+
+            sm:max-w-3xl
+            lg:max-w-4xl
+
             max-h-[90vh]
           "
         >
@@ -77,14 +84,27 @@ export default function ProjectDetailsModal({
             {project.title}
           </DialogTitle>
 
-          <div className="flex max-h-[90vh] flex-col">
+          <motion.div
+            initial={{
+              opacity: 0,
+              y: 16,
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+            }}
+            transition={{
+              duration: 0.25,
+              ease: "easeOut",
+            }}
+            className="flex max-h-[90vh] flex-col"
+          >
             {/* HEADER */}
-
             <div
               className="
-                border-b
                 px-6
-                py-5
+                pt-6
+                pb-4
               "
             >
               <div className="flex flex-col gap-3">
@@ -92,6 +112,7 @@ export default function ProjectDetailsModal({
                   className="
                     font-heading
                     text-2xl
+                    md:text-3xl
                     font-semibold
                     tracking-tight
                     leading-tight
@@ -100,14 +121,23 @@ export default function ProjectDetailsModal({
                   {project.title}
                 </h2>
 
-                <div className="flex flex-wrap items-center gap-2">
+                <div
+                  className="
+                    flex
+                    flex-wrap
+                    items-center
+                    gap-2
+                    text-sm
+                    text-muted-foreground
+                  "
+                >
                   <Badge
                     variant="outline"
                     className="
-                      h-7
-                      rounded-md
-                      px-3
-                      text-xs
+                      h-6
+                      rounded-full
+                      px-2.5
+                      text-[10px]
                       uppercase
                       tracking-wider
                     "
@@ -118,18 +148,16 @@ export default function ProjectDetailsModal({
                   </Badge>
 
                   {project.role && (
-                    <span className="text-sm text-muted-foreground">
-                      <HoverWords>
-                        {project.role}
-                      </HoverWords>
-                    </span>
+                    <>
+                      <span>•</span>
+                      <span>{project.role}</span>
+                    </>
                   )}
                 </div>
               </div>
             </div>
 
             {/* CONTENT */}
-
             <div
               className="
                 flex-1
@@ -145,7 +173,6 @@ export default function ProjectDetailsModal({
               >
 
                 {/* SCREENSHOTS */}
-
                 {project.screenshots &&
                   project.screenshots.length > 0 && (
                     <section className="space-y-3">
@@ -184,17 +211,22 @@ export default function ProjectDetailsModal({
                                     bg-muted/20
                                   "
                                 >
-                                  <img
+                                  <motion.img
                                     src={image}
-                                    alt={`${project.title} ${
-                                      index + 1
-                                    }`}
+                                    alt={`${project.title} ${index + 1}`}
                                     loading="lazy"
                                     onClick={() => setPreviewImage(image)}
+                                    whileHover={{
+                                      scale: 1.015,
+                                    }}
+                                    transition={{
+                                      duration: 0.2,
+                                    }}
                                     className="
                                       w-full
                                       aspect-[16/9]
                                       object-cover
+                                      cursor-pointer
                                     "
                                   />
                                 </div>
@@ -221,7 +253,6 @@ export default function ProjectDetailsModal({
                       </Carousel>
 
                       {/* INDICATOR */}
-
                       <div className="flex justify-center gap-1.5">
                         {project.screenshots.map(
                           (_, index) => (
@@ -247,7 +278,6 @@ export default function ProjectDetailsModal({
                   )}
 
                 {/* DESCRIPTION */}
-
                 <section>
                   <h3 className="text-sm font-medium">
                     Description
@@ -267,7 +297,6 @@ export default function ProjectDetailsModal({
                 </section>
 
                 {/* TECH STACK */}
-
                 <section className="space-y-3">
                   <h3 className="text-sm font-medium">
                     Tech Stack
@@ -277,10 +306,10 @@ export default function ProjectDetailsModal({
                     {project.techStack.map((tech) => (
                       <Badge
                         key={tech}
-                        variant="secondary"
+                        variant="outline"
                         className="
                           h-7
-                          rounded-md
+                          rounded-full
                           px-3
                           text-xs
                         "
@@ -292,7 +321,6 @@ export default function ProjectDetailsModal({
                 </section>
 
                 {/* FEATURES */}
-
                 {project.features &&
                   project.features.length > 0 && (
                     <section className="space-y-3">
@@ -306,15 +334,19 @@ export default function ProjectDetailsModal({
                             key={feature}
                             className="
                               flex
-                              items-center
+                              items-start
                               gap-2
                               text-sm
                               text-muted-foreground
                             "
                           >
                             <Check
-                              size={16}
-                              className="shrink-0"
+                              size={14}
+                              className="
+                                shrink-0
+                                mt-1
+                                text-primary
+                              "
                             />
 
                             <span>{feature}</span>
@@ -325,7 +357,6 @@ export default function ProjectDetailsModal({
                   )}
 
                 {/* ARCHITECTURE */}
-
                 {project.architecture &&
                   project.architecture.length > 0 && (
                     <section className="space-y-3">
@@ -355,20 +386,18 @@ export default function ProjectDetailsModal({
             </div>
 
             {/* FOOTER */}
-
             <div
               className="
                 border-t
                 px-6
                 py-4
-                bg-background
               "
             >
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-5">
                 {project.githubLink && (
                   <Button
+                    variant="ghost"
                     size="sm"
-                    variant="outline"
                     onClick={() =>
                       openLink(
                         project.githubLink,
@@ -376,38 +405,72 @@ export default function ProjectDetailsModal({
                         Github
                       )
                     }
+                    className="
+                      group
+                      h-auto
+                      p-0
+
+                      text-muted-foreground
+
+                      hover:bg-transparent
+                      hover:text-foreground
+                    "
                   >
-                    <Github size={14} />
+                    Source Code
 
-                    <span>Source Code</span>
+                    <ArrowUpRight
+                      size={14}
+                      className="
+                        transition-transform
+                        duration-200
 
-                    <ArrowUpRight size={14} />
+                        group-hover:translate-x-[2px]
+                        group-hover:-translate-y-[2px]
+                      "
+                    />
                   </Button>
                 )}
 
                 {project.liveLink && (
                   <Button
+                    variant="ghost"
                     size="sm"
-                    variant="outline"
                     onClick={() =>
                       openLink(
                         project.liveLink,
                         "Live Demo"
                       )
                     }
+                    className="
+                      group
+                      h-auto
+                      p-0
+
+                      text-muted-foreground
+
+                      hover:bg-transparent
+                      hover:text-foreground
+                    "
                   >
-                    <ExternalLink size={14} />
+                    Live Demo
 
-                    <span>Live Demo</span>
+                    <ArrowUpRight
+                      size={14}
+                      className="
+                        transition-transform
+                        duration-200
 
-                    <ArrowUpRight size={14} />
+                        group-hover:translate-x-[2px]
+                        group-hover:-translate-y-[2px]
+                      "
+                    />
                   </Button>
                 )}
 
                 {project.downloadLink && (
                   <Button
+                    variant="ghost"
                     size="sm"
-                    variant="outline"
                     onClick={() =>
                       openLink(
                         project.downloadLink,
@@ -415,17 +478,34 @@ export default function ProjectDetailsModal({
                         Download
                       )
                     }
+                    className="
+                      group
+                      h-auto
+                      p-0
+
+                      text-muted-foreground
+
+                      hover:bg-transparent
+                      hover:text-foreground
+                    "
                   >
-                    <Download size={14} />
+                    Download
 
-                    <span>Download</span>
+                    <ArrowUpRight
+                      size={14}
+                      className="
+                        transition-transform
+                        duration-200
 
-                    <ArrowUpRight size={14} />
+                        group-hover:translate-x-[2px]
+                        group-hover:-translate-y-[2px]
+                      "
+                    />
                   </Button>
                 )}
               </div>
             </div>
-          </div>
+          </motion.div>
         </DialogContent>
       </Dialog>
 
@@ -456,11 +536,17 @@ export default function ProjectDetailsModal({
               right-4
               top-4
               z-50
+
               rounded-full
-              bg-black/60
+
+              border
+              border-white/10
+
+              bg-background/80
+
               p-2
-              text-white
-              backdrop-blur
+
+              backdrop-blur-md
             "
           >
             <X size={18} />
@@ -475,14 +561,25 @@ export default function ProjectDetailsModal({
               h-[90vh]
             "
           >
-            <img
+            <motion.img
               src={previewImage ?? ""}
               alt="Preview"
+              initial={{
+                opacity: 0,
+                scale: 0.96,
+              }}
+              animate={{
+                opacity: 1,
+                scale: 1,
+              }}
+              transition={{
+                duration: 0.2,
+              }}
               className="
                 max-w-full
                 max-h-full
                 object-contain
-                rounded-lg
+                rounded-xl
               "
             />
           </div>

@@ -1,47 +1,84 @@
-import { Card, CardContent } from "@/components/ui/card";
-import SocialLinks from "@/components/SocialLinks";
-import { Mail } from "lucide-react";
 import HoverWords from "@/components/HoverWords";
 import Reveal from "@/components/Reveal";
+import SocialLinks from "@/components/SocialLinks";
+
+import { Card, CardContent } from "@/components/ui/card";
 
 export default function ContactSection() {
   return (
-    <section className="w-full max-w-5xl mx-auto px-6 py-24 flex flex-col gap-8 mb-20 items-center text-center">
-      <Reveal className="flex flex-col gap-3 items-center" delay={0.2}>
-        <h2 className="font-heading text-3xl font-bold tracking-tight text-foreground">
-          Get In Touch
-        </h2>
+    <section className="w-full py-24 lg:py-32">
+      <div className="mx-auto max-w-5xl px-6">
+        <div className="flex flex-col items-center text-center">
+          <Reveal
+            className="flex flex-col items-center gap-4"
+            delay={0.2}
+          >
+            <h2
+              className="
+                font-heading
+                text-3xl
+                sm:text-4xl
+                lg:text-5xl
+                font-bold
+                tracking-tight
+                text-foreground
+              "
+            >
+              Get In Touch
+            </h2>
 
-        <p className="text-sm font-body text-muted-foreground max-w-md">
-          <HoverWords>
-            Whether you have a question, a project idea, or just want to say hi,
-            feel free to reach out. I'll get back to you as soon as possible!
-          </HoverWords>
-        </p>
-      </Reveal>
+            <p
+              className="
+                max-w-2xl
+                text-sm
+                sm:text-base
+                leading-relaxed
+                text-muted-foreground
+              "
+            >
+              <HoverWords>
+                Whether you have a question, an
+                interesting project, a collaboration
+                opportunity, or simply want to say
+                hello, my inbox is always open.
+              </HoverWords>
+            </p>
+          </Reveal>
 
-      <Reveal className="relative w-full max-w-xs mt-8" delay={0.5}>
-        <span
-          className="
-            absolute -top-2.5 left-4 z-10
-            bg-background px-2
-            text-[11px] font-body text-muted-foreground
-            border border-border rounded-full
-            leading-5 flex items-center gap-1
-          "
-        >
-          <HoverWords>
-            <Mail className="w-3 h-3" />
-            Contact Me
-          </HoverWords>
-        </span>
+          <Reveal
+            className="mt-12 w-full max-w-xl"
+            delay={0.5}
+          >
+            <Card
+              className="
+                relative
+                overflow-hidden
+                rounded-3xl
+                border-border/40
+                bg-card/40
+                backdrop-blur-md
+              "
+            >
+              <div
+                className="
+                  absolute
+                  right-0
+                  top-0
+                  h-32
+                  w-32
+                  rounded-full
+                  bg-primary/10
+                  blur-3xl
+                "
+              />
 
-        <Card className="w-full pt-3 pb-2 border-border/40 bg-card/50 backdrop-blur-sm">
-          <CardContent className="px-4 py-0">
-            <SocialLinks />
-          </CardContent>
-        </Card>
-      </Reveal>
+              <CardContent className="px-6 py-2">
+                <SocialLinks />
+              </CardContent>
+            </Card>
+          </Reveal>
+        </div>
+      </div>
     </section>
   );
 }
