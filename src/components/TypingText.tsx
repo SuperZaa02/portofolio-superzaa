@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import HoverWords from "./HoverWords";
 
 const TOPICS = [
   "Reverse Engineering",
@@ -16,9 +18,7 @@ interface TypingTextProps {
 
 export default function TypingText({ start }: TypingTextProps) {
   const [topicIndex, setTopicIndex] = useState(0);
-
   const [displayed, setDisplayed] = useState("");
-
   const [phase, setPhase] = useState<"typing" | "hold" | "erasing">("typing");
 
   useEffect(() => {
@@ -53,14 +53,13 @@ export default function TypingText({ start }: TypingTextProps) {
     if (phase === "erasing") {
       if (displayed.length > 0) {
         const timeout = setTimeout(() => {
-          setDisplayed(displayed.slice(0, -1));
+          setDisplayed((prev) => prev.slice(0, -1));
         }, 40);
 
         return () => clearTimeout(timeout);
       }
 
       setTopicIndex((prev) => (prev + 1) % TOPICS.length);
-
       setPhase("typing");
     }
   }, [displayed, phase, topicIndex, start]);
@@ -70,29 +69,32 @@ export default function TypingText({ start }: TypingTextProps) {
       style={{
         fontFamily: "'Courier Prime', monospace",
       }}
-      className="
-        inline-flex
-        min-w-[22ch]
-        items-center
-        justify-start
-        font-semibold
-        text-foreground
-      "
+      className="inline-flex min-w-[22ch] items-center font-semibold text-foreground"
     >
-      {displayed}
+      <AnimatePresence mode="popLayout">
+        {displayed.split("").map((char, index) => (
+          <motion.span
+            key={`${char}-${index}`}
+            className="whitespace-pre"
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.15 }}
+          >
+            <HoverWords>{char}</HoverWords>
+          </motion.span>
+        ))}
+      </AnimatePresence>
 
-      <span
-        className="
-          ml-[2px]
-          inline-block
-          h-[1.1em]
-          w-[2px]
-          animate-pulse
-          bg-foreground
-          align-middle
-        "
-        style={{
-          animationDuration: "0.5s",
+      <motion.span
+        className="ml-[2px] inline-block h-[1.1em] w-[2px] bg-foreground"
+        animate={{
+          opacity: [1, 0, 1],
+        }}
+        transition={{
+          duration: 0.8,
+          repeat: Infinity,
+          ease: "linear",
         }}
       />
     </span>

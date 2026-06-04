@@ -19,14 +19,13 @@ function wrapWords(text: string) {
       <motion.span
         key={index}
         className="
+          inline-block
+          cursor-default
           transition-colors
           duration-200
           hover:text-foreground
+          will-change-transform
         "
-        style={{
-          display: "inline-block",
-          transformOrigin: "center bottom",
-        }}
         whileHover={{
           y: -2,
           scale: 1.03,
@@ -53,13 +52,11 @@ function processNode(node: React.ReactNode): React.ReactNode {
     return node;
   }
 
-  return React.cloneElement(
-    node,
-    {
-      ...node.props,
-    },
-    React.Children.map(node.props.children, processNode),
-  );
+  const element = node as React.ReactElement<{
+    children?: React.ReactNode;
+  }>;
+
+  return React.cloneElement(element, {}, React.Children.map(element.props.children, processNode));
 }
 
 export default function HoverWords({ children }: HoverWordsProps) {
