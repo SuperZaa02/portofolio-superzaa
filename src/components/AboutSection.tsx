@@ -19,10 +19,9 @@ export default function AboutSection() {
             grid
             items-center
             gap-12
-            lg:gap-16
-            xl:gap-20
-            lg:grid-cols-[minmax(0,1fr)_420px]
-            xl:grid-cols-[minmax(0,1fr)_500px]
+            lg:gap-12
+            xl:gap-14
+            lg:grid-cols-[3fr_1fr]
           "
         >
           {/* Content */}
@@ -63,7 +62,7 @@ export default function AboutSection() {
                 lg:text-lg
                 leading-relaxed
                 text-muted-foreground
-                max-w-3xl
+                max-w-none
               "
             >
               <Reveal delay={0.4}>
@@ -103,13 +102,13 @@ export default function AboutSection() {
               className="
                 relative
                 mx-auto
-                flex
+                hidden
+                lg:flex
                 w-full
-                max-w-[280px]
-                sm:max-w-[340px]
-                lg:max-w-[420px]
-                xl:max-w-[500px]
+                max-w-[260px]
+                xl:max-w-[320px]
                 justify-center
+                items-start
                 select-none
               "
               initial={{ opacity: 0, x: 30 }}
@@ -131,10 +130,10 @@ export default function AboutSection() {
                   absolute
                   inset-0
                   m-auto
-                  h-64
-                  w-64
-                  sm:h-80
-                  sm:w-80
+                  h-56
+                  w-56
+                  xl:h-68
+                  xl:w-68
                   rounded-full
                   bg-primary/15
                   blur-3xl
@@ -148,7 +147,7 @@ export default function AboutSection() {
                 onDragStart={(e) => e.preventDefault()}
                 onContextMenu={(e) => e.preventDefault()}
                 animate={{
-                  y: [0, -10, 0],
+                  y: [0, -6, 0],
                 }}
                 transition={{
                   duration: 5,
