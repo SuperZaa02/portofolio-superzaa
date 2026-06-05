@@ -32,49 +32,72 @@ export default function FooterSection() {
           <div
             className="
               grid
-              gap-2
+              grid-cols-2
+              gap-y-3
               px-6
-              py-5
-              text-center
-              sm:grid-cols-3
-              sm:items-center
+              py-4
+              items-center
+              sm:flex
+              sm:flex-row
+              sm:justify-between
+              sm:gap-y-0
             "
           >
+            {/* Copyright: Mengisi baris atas penuh di mobile, pindah ke tengah di desktop */}
             <p
               className="
-                font-mono
-                text-[11px]
-                text-muted-foreground
-                sm:text-left
-              "
-            >
-              -6.2383, 106.9756
-            </p>
-
-            <p
-              className="
-                text-xs
-                text-muted-foreground
-                sm:text-center
+                col-span-2 
+                text-center 
+                text-xs 
+                text-muted-foreground 
+                transition-colors 
+                hover:text-foreground
+                sm:order-2 
+                sm:flex-1
               "
             >
               &copy; {new Date().getUTCFullYear()} Faeza Raziq
             </p>
 
-            <p
-              onClick={() => setVersionModalOpen(true)}
-              className="
-              cursor-pointer
-              font-mono
-              text-[11px]
-              text-muted-foreground
-              transition-colors
-              hover:text-foreground
-              sm:text-right
-            "
-            >
-              {buildVersion}
-            </p>
+            <div className="text-left sm:order-1 sm:flex-1 sm:text-left">
+              <span
+                onClick={() =>
+                  window.open(
+                    "https://www.google.com/search?q=6%C2%B0LU-11%C2%B0LS%20&%2095%C2%B0BT-141%C2%B0BT",
+                  )
+                }
+                className="
+                  inline-block
+                  cursor-pointer
+                  font-mono
+                  text-[10px]
+                  sm:text-[11px]
+                  text-muted-foreground
+                  transition-colors
+                  hover:text-foreground
+                "
+              >
+                6&deg;LU-11&deg;LS & 95&deg;BT-141&deg;BT
+              </span>
+            </div>
+
+            <div className="text-right sm:order-3 sm:flex-1 sm:text-right">
+              <span
+                onClick={() => setVersionModalOpen(true)}
+                className="
+                  inline-block
+                  cursor-pointer
+                  font-mono
+                  text-[10px]
+                  sm:text-[11px]
+                  text-muted-foreground
+                  transition-colors
+                  hover:text-foreground
+                "
+              >
+                {buildVersion}
+              </span>
+            </div>
 
             <VersionModal open={versionModalOpen} onOpenChange={setVersionModalOpen} />
           </div>
