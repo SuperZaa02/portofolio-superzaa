@@ -10,6 +10,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 
 import { LinkConfirmModalProvider } from "@/hooks/useLinkConfirmModal";
 import GlobalLinkConfirmModal from "@/components/GlobalLinkConfirmModal";
+import BackgroundTechIcons from "@/components/TechBackground";
 
 const queryClient = new QueryClient();
 
@@ -21,7 +22,9 @@ export function Layout({ children }: { children: ReactNode }) {
           <Toaster />
           <Sonner />
 
-          {children}
+          <BackgroundTechIcons />
+
+          <div className="relative z-10">{children}</div>
 
           <GlobalLinkConfirmModal />
         </LinkConfirmModalProvider>

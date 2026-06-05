@@ -1,5 +1,6 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
+import svgr from "vite-plugin-svgr";
 import vike from "vike/plugin";
 import path from "path";
 import { execSync } from "node:child_process";
@@ -29,7 +30,7 @@ export default defineConfig({
       overlay: false,
     },
   },
-  plugins: [react(), vike()],
+  plugins: [react(), vike(), svgr()],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
