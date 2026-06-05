@@ -6,14 +6,10 @@ interface HoverWordsProps {
 }
 
 function wrapWords(text: string) {
-  let wordIndex = 0;
-
   return text.split(/(\s+)/).map((part, index) => {
     if (/^\s+$/.test(part)) {
       return part;
     }
-
-    const currentWordIndex = wordIndex++;
 
     return (
       <motion.span
@@ -27,9 +23,8 @@ function wrapWords(text: string) {
         "
         whileHover={{
           y: -2,
-          scale: 1.06,
-          rotate: currentWordIndex % 2 === 0 ? -2 : 2,
-          color: "hsl(var(--primary))",
+          scale: 1.03,
+          color: "#000000",
           textShadow: `
             0 0 8px hsl(var(--primary) / 0.5),
             0 0 16px hsl(var(--primary) / 0.3)

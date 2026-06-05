@@ -138,7 +138,7 @@ export default function HeroSection() {
             className="
               rounded-full
               border
-              border-border
+              border-muted-foreground
               px-5
               py-2
               text-sm
@@ -156,7 +156,7 @@ export default function HeroSection() {
             className="
               rounded-full
               border
-              border-border
+              border-muted-foreground
               px-5
               py-2
               text-sm
@@ -174,7 +174,7 @@ export default function HeroSection() {
             className="
               rounded-full
               border
-              border-border
+              border-muted-foreground
               px-5
               py-2
               text-sm
