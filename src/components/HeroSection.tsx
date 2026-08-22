@@ -65,25 +65,6 @@ export default function HeroSection() {
           textAlign: "center",
         }}
       >
-        {/* SMALL INTRO */}
-        <motion.div
-          variants={fadeInUp}
-          initial="hidden"
-          animate="visible"
-          custom={0}
-          style={{
-            fontFamily: "'JetBrains Mono', monospace",
-            fontSize: 10,
-            lineHeight: 1.4,
-            letterSpacing: "0.14em",
-            color: "#6F6F6F",
-            textTransform: "uppercase",
-            marginBottom: isMobile ? 18 : 24,
-          }}
-        >
-          Web Portfolio
-        </motion.div>
-
         {/* NAME */}
         <motion.h1
           variants={fadeInUp}
