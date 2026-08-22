@@ -1,216 +1,141 @@
-import { useMemo } from "react";
-import { motion } from "framer-motion";
+"use client";
 
-import ReactIcon from "@/components/icons/react.svg?react";
-import NextIcon from "@/components/icons/next-js.svg?react";
-import TsIcon from "@/components/icons/typescript.svg?react";
-import NodeIcon from "@/components/icons/node-js.svg?react";
-import PgIcon from "@/components/icons/postgresql.svg?react";
-import PythonIcon from "@/components/icons/python.svg?react";
-import NestIcon from "@/components/icons/nest-js.svg?react";
-import GithubIcon from "@/components/icons/github.svg?react";
-import DockerIcon from "@/components/icons/docker.svg?react";
-import TailwindIcon from "@/components/icons/tailwind.svg?react";
-import LinuxIcon from "@/components/icons/linux.svg?react";
+/* ============================================================
+   INDUSTRIAL BACKGROUND
+   Replaces floating tech icons with a classified military grid:
+   - Structural grid with 1px cell lines
+   - Corner crosshair markers
+   - Structural accent lines
+   - No glows, no blur, no floating icons
+   ============================================================ */
 
-type IconComponent = React.ComponentType<React.SVGProps<SVGSVGElement>>;
+const CORNER_SIZE = 16;
 
-const ICONS: IconComponent[] = [
-  ReactIcon,
-  NextIcon,
-  TsIcon,
-  NodeIcon,
-  PgIcon,
-  PythonIcon,
-  NestIcon,
-  GithubIcon,
-  DockerIcon,
-  TailwindIcon,
-  LinuxIcon,
-];
-
-function shuffle<T>(array: T[]) {
-  const copy = [...array];
-
-  for (let i = copy.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-
-    [copy[i], copy[j]] = [copy[j], copy[i]];
-  }
-
-  return copy;
+function Crosshair({ x, y }: { x: "left" | "right"; y: "top" | "bottom" }) {
+  return (
+    <div
+      className="absolute pointer-events-none"
+      style={{
+        [x]: 24,
+        [y]: 24,
+        width: CORNER_SIZE,
+        height: CORNER_SIZE,
+      }}
+    >
+      {/* Horizontal arm */}
+      <div
+        style={{
+          position: "absolute",
+          top: "50%",
+          left: 0,
+          right: 0,
+          height: 1,
+          background: "#3A3A3A",
+          transform: "translateY(-50%)",
+        }}
+      />
+      {/* Vertical arm */}
+      <div
+        style={{
+          position: "absolute",
+          left: "50%",
+          top: 0,
+          bottom: 0,
+          width: 1,
+          background: "#3A3A3A",
+          transform: "translateX(-50%)",
+        }}
+      />
+      {/* Center dot */}
+      <div
+        style={{
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          width: 3,
+          height: 3,
+          background: "#E61919",
+          transform: "translate(-50%, -50%)",
+        }}
+      />
+    </div>
+  );
 }
 
-export default function BackgroundTechIcons() {
-  const particles = useMemo(() => {
-    const shuffledIcons = shuffle(ICONS);
-
-    const zones = [
-      { left: 8, top: 12 },
-      { left: 32, top: 16 },
-      { left: 68, top: 14 },
-      { left: 92, top: 24 },
-
-      { left: 12, top: 56 },
-      { left: 50, top: 50 },
-      { left: 88, top: 58 },
-
-      { left: 18, top: 88 },
-      { left: 50, top: 92 },
-      { left: 78, top: 86 },
-
-      { left: 92, top: 76 },
-      { left: 8, top: 34 },
-    ];
-
-    const sizes = [170, 145, 130, 120, 110, 105, 100, 95, 90, 85, 80];
-
-    return shuffledIcons.map((Icon, index) => {
-      const zone = zones[index];
-
-      const offsetX = Math.random() * 4 - 2;
-      const offsetY = Math.random() * 4 - 2;
-
-      return {
-        Icon,
-
-        left: zone.left + offsetX,
-        top: zone.top + offsetY,
-
-        size: sizes[index],
-
-        opacity: index < 3 ? 0.22 : 0.14 + Math.random() * 0.06,
-
-        duration: 18 + Math.random() * 14,
-
-        rotateAmount: 1 + Math.random() * 2,
-
-        floatX: 4 + Math.random() * 5,
-
-        floatY: 6 + Math.random() * 8,
-
-        blur: index > 5 && Math.random() > 0.6,
-      };
-    });
-  }, []);
+/* Grid of static structural lines */
+function StructuralGrid() {
+  const cols = 12;
+  const rows = 8;
 
   return (
-    <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
-      {/* GRID */}
+    <div
+      className="absolute inset-0 pointer-events-none"
+      style={{
+        display: "grid",
+        gridTemplateColumns: `repeat(${cols}, 1fr)`,
+        gridTemplateRows: `repeat(${rows}, 1fr)`,
+        opacity: 0.06,
+      }}
+    >
+      {Array.from({ length: cols * rows }).map((_, i) => (
+        <div
+          key={i}
+          style={{
+            border: "1px solid #EAEAEA",
+          }}
+        />
+      ))}
+    </div>
+  );
+}
 
+export default function IndustrialBackground() {
+  return (
+    <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden" style={{ background: "#0A0A0A" }}>
+      {/* STRUCTURAL GRID */}
+      <StructuralGrid />
+
+      {/* HORIZONTAL STRUCTURAL LINES */}
+      <div className="absolute top-[25%] left-0 right-0" style={{ height: 1, background: "#3A3A3A", opacity: 0.4 }} />
+      <div className="absolute top-[50%] left-0 right-0" style={{ height: 1, background: "#3A3A3A", opacity: 0.2 }} />
+      <div className="absolute top-[75%] left-0 right-0" style={{ height: 1, background: "#3A3A3A", opacity: 0.4 }} />
+
+      {/* VERTICAL STRUCTURAL LINES */}
+      <div className="absolute top-0 bottom-0 left-[20%]" style={{ width: 1, background: "#3A3A3A", opacity: 0.2 }} />
+      <div className="absolute top-0 bottom-0 right-[20%]" style={{ width: 1, background: "#3A3A3A", opacity: 0.2 }} />
+
+      {/* ACCENT LINE — red structural marker */}
       <div
-        className="
-          absolute
-          inset-0
-          opacity-[0.08]
-          [background-image:
-            linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),
-            linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)]
-          [background-size:52px_52px]
-          [mask-image:radial-gradient(circle_at_center,black,transparent_95%)]
-        "
-      />
-
-      {/* ACCENT LINES */}
-
-      <div className="absolute top-[20%] left-0 h-px w-full bg-primary/10" />
-      <div className="absolute top-[80%] left-0 h-px w-full bg-primary/10" />
-
-      <div className="absolute left-[20%] top-0 h-full w-px bg-primary/5" />
-      <div className="absolute left-[80%] top-0 h-full w-px bg-primary/5" />
-
-      {/* GLOW LEFT */}
-
-      <motion.div
-        className="
-          absolute
-          left-[-18rem]
-          top-[5%]
-          h-[40rem]
-          w-[40rem]
-          rounded-full
-          bg-primary/5
-          blur-3xl
-        "
-        animate={{
-          x: [-20, 20, -20],
-          y: [-15, 15, -15],
-        }}
-        transition={{
-          duration: 30,
-          repeat: Infinity,
-          ease: "easeInOut",
+        className="absolute left-0"
+        style={{
+          top: 0,
+          bottom: 0,
+          width: 2,
+          background: "#E61919",
+          opacity: 0.5,
         }}
       />
 
-      {/* GLOW RIGHT */}
+      {/* CORNER CROSSHAIRS */}
+      <Crosshair x="left" y="top" />
+      <Crosshair x="right" y="top" />
+      <Crosshair x="left" y="bottom" />
+      <Crosshair x="right" y="bottom" />
 
-      <motion.div
-        className="
-          absolute
-          right-[-18rem]
-          bottom-[5%]
-          h-[40rem]
-          w-[40rem]
-          rounded-full
-          bg-primary/5
-          blur-3xl
-        "
-        animate={{
-          x: [20, -20, 20],
-          y: [15, -15, 15],
+      {/* TELEMETRY LABEL — top right */}
+      <div
+        className="absolute top-6 right-8 pointer-events-none"
+        style={{
+          fontFamily: "'JetBrains Mono', monospace",
+          fontSize: 9,
+          letterSpacing: "0.15em",
+          color: "#3A3A3A",
+          textTransform: "uppercase",
+          userSelect: "none",
         }}
-        transition={{
-          duration: 35,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
-
-      {/* ICONS */}
-      {particles.map((item, index) => {
-        const Icon = item.Icon;
-
-        return (
-          <motion.div
-            key={index}
-            className="
-                absolute
-                will-change-transform
-                select-none
-            "
-            style={{
-              left: `${item.left}%`,
-              top: `${item.top}%`,
-              width: `clamp(70px, ${item.size / 10}vw, ${item.size}px)`,
-              height: `clamp(70px, ${item.size / 10}vw, ${item.size}px)`,
-              opacity: item.opacity,
-              filter: "drop-shadow(0 0 12px rgba(255,255,255,0.04))",
-            }}
-            animate={{
-              x: [-item.floatX, item.floatX, -item.floatX],
-              y: [-item.floatY, item.floatY, -item.floatY],
-              rotate: [-item.rotateAmount, item.rotateAmount, -item.rotateAmount],
-            }}
-            transition={{
-              duration: item.duration,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          >
-            <Icon
-              className={`
-                text-foreground
-                ${item.blur ? "blur-[1px]" : ""}
-            `}
-              style={{
-                width: item.size,
-                height: item.size,
-              }}
-            />
-          </motion.div>
-        );
-      })}
+      >
+        SYS / TERMINAL-01
+      </div>
     </div>
   );
 }

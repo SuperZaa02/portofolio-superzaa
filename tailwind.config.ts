@@ -20,8 +20,10 @@ const config: Config = {
     },
     extend: {
       fontFamily: {
-        heading: ["Poppins", "sans-serif"],
+        // INDUSTRIAL BRUTALISM — no Poppins
+        heading: ["Inter", "sans-serif"],
         body: ["Inter", "sans-serif"],
+        mono: ["JetBrains Mono", "monospace"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -57,13 +59,35 @@ const config: Config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        // INDUSTRIAL TOKENS — direct hex for guaranteed consistency
+        "terminal-green": "#4AF626",
+        "accent-red": "#E61919",
+        "accent-red-bright": "#FF2A2A",
+        "surface": "#121212",
+        "surface-2": "#181818",
+        "border-strong": "#EAEAEA",
+        "border-muted": "#3A3A3A",
       },
       borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+        // ALL ZERO — industrial rule
+        lg: "0px",
+        md: "0px",
+        sm: "0px",
+        DEFAULT: "0px",
+        xl: "0px",
+        "2xl": "0px",
+        "3xl": "0px",
+        full: "0px",
       },
-      // Removed custom fadeIn keyframes/animation; using Framer Motion instead
+      fontSize: {
+        "hero": ["clamp(3.5rem, 9vw, 9rem)", { lineHeight: "0.9", letterSpacing: "-0.03em" }],
+        "section": ["clamp(2rem, 5vw, 4rem)", { lineHeight: "0.95", letterSpacing: "-0.02em" }],
+      },
+      letterSpacing: {
+        "mono-tight": "0.05em",
+        "mono-normal": "0.08em",
+        "mono-wide": "0.12em",
+      },
     },
   },
   plugins: [tailwindcssAnimate],

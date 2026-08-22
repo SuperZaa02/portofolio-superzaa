@@ -1,10 +1,8 @@
 import React from "react";
 import FooterSection from "@/components/FooterSection";
-import HoverWords from "@/components/HoverWords";
 import Reveal from "@/components/Reveal";
-import { Card, CardContent } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
-import { Compass } from "lucide-react";
+import { motion } from "framer-motion";
+import { fadeInUp } from "@/lib/animations";
 
 type ErrorPageProps = {
   code?: string | number;
@@ -20,47 +18,152 @@ function ErrorPage({
   showFooter = true,
 }: ErrorPageProps) {
   const defaultMessage = (
-    <>The page you're looking for doesn't exist or may have been moved or deleted.</>
+    <>
+      The page you&apos;re looking for doesn&apos;t exist or may have been
+      moved or deleted.
+    </>
   );
 
+  const errorCode = String(code).padStart(3, "0");
+
+  const rows = [
+    ["CODE", `E-${errorCode}`],
+    ["MODULE", "NAVIGATION"],
+    ["STATUS", title],
+  ];
+
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center px-6 py-16">
-      <main className="flex flex-1 flex-col items-center justify-center text-center max-w-xl w-full gap-16 sm:gap-20">
-        {/* Header */}
-        <div className="flex flex-col items-center gap-3">
-          <Reveal className="relative flex items-center justify-center" delay={0}>
-            <h1 className="font-heading text-8xl sm:text-9xl font-bold tracking-tight text-foreground z-10 select-none">
-              {code}
-            </h1>
-          </Reveal>
-
-          <Separator />
-
-          <Reveal
-            className="mt-1 text-sm sm:text-base font-body uppercase tracking-[0.3em] text-muted-foreground"
-            delay={0.2}
+    <div className="flex min-h-svh flex-col overflow-x-hidden bg-[#0A0A0A]">
+      <main className="flex flex-1 flex-col items-center justify-center px-4 py-12 sm:px-6 sm:py-16 md:py-20">
+        {/* ERROR CODE */}
+        <motion.div
+          variants={fadeInUp}
+          initial="hidden"
+          animate="visible"
+          custom={0.05}
+          className="w-full text-center"
+        >
+          <div
+            className="
+              relative
+              inline-block
+              font-black
+              leading-[0.8]
+              tracking-[-0.06em]
+              text-[#EAEAEA]
+              text-[clamp(6rem,22vw,15rem)]
+            "
+            style={{
+              fontFamily: "'Inter', sans-serif",
+            }}
           >
-            <HoverWords>{title}</HoverWords>
-          </Reveal>
-        </div>
+            {code}
 
-        {/* Info card — mirrors Index card block */}
-        <Reveal className="flex justify-center w-full" delay={0.4}>
-          <div className="relative w-full max-w-sm">
-            {/* Floating label — same pattern as Index "Contact Me" badge */}
-            <span className="absolute -top-2.5 left-4 z-10 bg-background px-2 text-[11px] font-body text-muted-foreground border border-border rounded-full leading-5 flex items-center gap-1">
-              <Compass className="w-3 h-3" />
-              Lost?
-            </span>
+            <div className="absolute bottom-[-4px] left-0 right-0 h-[3px] bg-[#E61919]" />
+          </div>
+        </motion.div>
 
-            <Card className="w-full pt-5 pb-4">
-              <CardContent className="px-5 py-0 flex flex-col gap-4">
-                {/* Message */}
-                <p className="font-body text-sm text-muted-foreground leading-relaxed">
-                  <HoverWords>{message ?? defaultMessage}</HoverWords>
-                </p>
-              </CardContent>
-            </Card>
+        {/* ERROR REPORT */}
+        <Reveal delay={0.18}>
+          <div className="mt-6 w-full max-w-[460px] border border-[#E61919] bg-[#121212] sm:mt-8">
+            {/* HEADER */}
+            <div
+              className="bg-[#E61919] px-3.5 py-[7px] text-[10px] font-semibold uppercase tracking-[0.14em] text-[#EAEAEA]"
+              style={{
+                fontFamily: "'JetBrains Mono', monospace",
+              }}
+            >
+              Error Report
+            </div>
+
+            {/* DATA */}
+            <div>
+              {rows.map(([label, value], index) => (
+                <div
+                  key={label}
+                  className={[
+                    "flex min-h-[40px] items-center justify-between gap-4 px-3.5 py-2.5",
+                    index < rows.length - 1
+                      ? "border-b border-[#1E1E1E]"
+                      : "",
+                  ].join(" ")}
+                >
+                  <span
+                    className="shrink-0 text-[10px] uppercase tracking-[0.1em] text-[#8A8A8A]"
+                    style={{
+                      fontFamily: "'JetBrains Mono', monospace",
+                    }}
+                  >
+                    {label}
+                  </span>
+
+                  <span
+                    className="
+                      min-w-0
+                      break-words
+                      text-right
+                      text-[10px]
+                      font-semibold
+                      uppercase
+                      tracking-[0.08em]
+                    "
+                    style={{
+                      fontFamily: "'JetBrains Mono', monospace",
+                      color:
+                        label === "STATUS" ? "#E61919" : "#EAEAEA",
+                    }}
+                  >
+                    {value}
+                  </span>
+                </div>
+              ))}
+            </div>
+
+            {/* MESSAGE */}
+            <div className="border-t border-[#3A3A3A] px-3.5 py-3.5">
+              <div
+                className="break-words text-[10px] uppercase leading-[1.7] tracking-[0.05em] text-[#8A8A8A]"
+                style={{
+                  fontFamily: "'JetBrains Mono', monospace",
+                }}
+              >
+                {message ?? defaultMessage}
+              </div>
+            </div>
+
+            {/* ACTION */}
+            <div className="border-t border-[#3A3A3A] px-3.5 py-2.5">
+              <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                <span
+                  className="text-[10px] uppercase tracking-[0.08em] text-[#E61919]"
+                  style={{
+                    fontFamily: "'JetBrains Mono', monospace",
+                  }}
+                >
+                  Connection Terminated
+                </span>
+
+                <a
+                  href="/"
+                  className="
+                    w-fit
+                    text-[10px]
+                    uppercase
+                    tracking-[0.08em]
+                    text-[#8A8A8A]
+                    no-underline
+                    transition-colors
+                    duration-100
+                    hover:text-[#EAEAEA]
+                  "
+                  style={{
+                    fontFamily: "'JetBrains Mono', monospace",
+                  }}
+                >
+                  Return to Base
+                </a>
+              </div>
+            </div>
           </div>
         </Reveal>
       </main>

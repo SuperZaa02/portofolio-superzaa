@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import HoverWords from "./HoverWords";
 
 const TOPICS = [
   "Reverse Engineering",
@@ -16,6 +15,10 @@ interface TypingTextProps {
   start: boolean;
 }
 
+/* ============================================================
+   TYPING TEXT — TERMINAL STYLE
+   JetBrains Mono, red blinking cursor, no bounce animation.
+   ============================================================ */
 export default function TypingText({ start }: TypingTextProps) {
   const [topicIndex, setTopicIndex] = useState(0);
   const [displayed, setDisplayed] = useState("");
@@ -30,7 +33,7 @@ export default function TypingText({ start }: TypingTextProps) {
       if (displayed.length < current.length) {
         const timeout = setTimeout(() => {
           setDisplayed(current.slice(0, displayed.length + 1));
-        }, 70);
+        }, 65);
 
         return () => clearTimeout(timeout);
       }
@@ -54,7 +57,7 @@ export default function TypingText({ start }: TypingTextProps) {
       if (displayed.length > 0) {
         const timeout = setTimeout(() => {
           setDisplayed((prev) => prev.slice(0, -1));
-        }, 40);
+        }, 35);
 
         return () => clearTimeout(timeout);
       }
@@ -67,32 +70,37 @@ export default function TypingText({ start }: TypingTextProps) {
   return (
     <span
       style={{
-        fontFamily: "'Courier Prime', monospace",
+        fontFamily: "'JetBrains Mono', monospace",
+        fontSize: "0.85em",
+        fontWeight: 500,
+        letterSpacing: "0.05em",
       }}
-      className="inline-flex min-w-[22ch] items-center font-semibold text-foreground"
+      className="inline-flex min-w-[22ch] items-center text-foreground"
     >
       <AnimatePresence mode="popLayout">
         {displayed.split("").map((char, index) => (
           <motion.span
             key={`${char}-${index}`}
             className="whitespace-pre"
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.15 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.06, ease: "linear" }}
           >
-            <HoverWords>{char}</HoverWords>
+            {char}
           </motion.span>
         ))}
       </AnimatePresence>
 
+      {/* RED BLINKING CURSOR */}
       <motion.span
-        className="ml-[2px] inline-block h-[1.1em] w-[2px] bg-foreground"
+        className="ml-[2px] inline-block h-[1em] w-[2px]"
+        style={{ background: "#E61919" }}
         animate={{
           opacity: [1, 0, 1],
         }}
         transition={{
-          duration: 0.8,
+          duration: 0.9,
           repeat: Infinity,
           ease: "linear",
         }}

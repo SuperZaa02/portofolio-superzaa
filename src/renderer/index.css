@@ -1,65 +1,249 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* ============================================================
+   INDUSTRIAL BRUTALISM & TACTICAL TELEMETRY
+   Design System — Color Tokens & Global Rules
+   ============================================================ */
+
 @layer base {
   :root {
-    --background: 220 20% 97%;
-    --foreground: 220 20% 10%;
-    --card: 220 20% 95%;
-    --card-foreground: 220 20% 10%;
-    --popover: 220 20% 97%;
-    --popover-foreground: 220 20% 10%;
-    --primary: 217 91% 60%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 220 14% 90%;
-    --secondary-foreground: 220 20% 10%;
-    --muted: 220 14% 92%;
-    --muted-foreground: 220 10% 50%;
-    --accent: 217 91% 60%;
-    --accent-foreground: 0 0% 100%;
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 100%;
-    --border: 220 14% 88%;
-    --input: 220 14% 88%;
-    --ring: 217 91% 60%;
-    --radius: 0.5rem;
-  }
+    /* BASE PALETTE */
+    --bg:          #0A0A0A;
+    --surface:     #121212;
+    --surface-2:   #181818;
 
-  .dark {
-    --background: 222 30% 6%;
-    --foreground: 210 20% 92%;
-    --card: 222 25% 9%;
-    --card-foreground: 210 20% 92%;
-    --popover: 222 25% 9%;
-    --popover-foreground: 210 20% 92%;
-    --primary: 217 91% 60%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 222 20% 14%;
-    --secondary-foreground: 210 20% 85%;
-    --muted: 222 20% 14%;
-    --muted-foreground: 215 15% 55%;
-    --accent: 217 91% 60%;
-    --accent-foreground: 0 0% 100%;
-    --destructive: 0 62% 30%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 222 20% 16%;
-    --input: 222 20% 16%;
-    --ring: 217 91% 60%;
+    /* TYPOGRAPHY */
+    --text:        #EAEAEA;
+    --muted:       #8A8A8A;
+
+    /* BORDERS */
+    --border:      #3A3A3A;
+    --border-strong: #EAEAEA;
+
+    /* ACCENT */
+    --accent:       #E61919;
+    --accent-bright: #FF2A2A;
+
+    /* SYSTEM STATUS — ONE USE ONLY */
+    --terminal-green: #4AF626;
+
+    /* FONTS */
+    --font-display: "Inter", sans-serif;
+    --font-mono:    "JetBrains Mono", monospace;
+
+    /* SHADCN COMPAT — mapped to industrial tokens */
+    --background:         0 0% 4%;       /* #0A0A0A */
+    --foreground:         0 0% 92%;      /* #EAEAEA */
+    --card:               0 0% 7%;       /* #121212 */
+    --card-foreground:    0 0% 92%;
+    --popover:            0 0% 7%;
+    --popover-foreground: 0 0% 92%;
+    --primary:            0 81% 50%;     /* #E61919 accent red */
+    --primary-foreground: 0 0% 92%;
+    --secondary:          0 0% 9%;       /* #181818 */
+    --secondary-foreground: 0 0% 65%;   /* #8A8A8A */
+    --muted:              0 0% 9%;
+    --muted-foreground:   0 0% 54%;      /* #8A8A8A */
+    --accent:             0 81% 50%;
+    --accent-foreground:  0 0% 92%;
+    --destructive:        0 81% 50%;
+    --destructive-foreground: 0 0% 92%;
+    --border:             0 0% 23%;      /* #3A3A3A */
+    --input:              0 0% 9%;
+    --ring:               0 81% 50%;
+    --radius:             0px;
   }
 }
 
+/* ============================================================
+   GLOBAL BASE RULES
+   ============================================================ */
+
 @layer base {
+  /* ZERO RADIUS — ALL ELEMENTS */
   * {
+    border-radius: 0 !important;
     @apply border-border;
   }
+
   html {
-    @apply dark;
+    background-color: #0A0A0A;
     scroll-behavior: smooth;
+    color-scheme: dark;
   }
+
   body {
-    @apply bg-background text-foreground font-body antialiased;
+    background-color: #0A0A0A;
+    color: #EAEAEA;
+    font-family: var(--font-display);
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* CRT SCANLINE TEXTURE — global, very subtle */
+  body::after {
+    content: "";
+    pointer-events: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background-image: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.08) 2px,
+      rgba(0, 0, 0, 0.08) 4px
+    );
+    opacity: 1;
+  }
+
+  /* CUSTOM SCROLLBAR */
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0A0A0A;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #3A3A3A;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #EAEAEA;
+  }
+
+  /* GLOBAL FOCUS — accessible red ring */
+  *:focus-visible {
+    outline: 1px solid #E61919 !important;
+    outline-offset: 2px !important;
+  }
+
+  /* SELECTION */
+  ::selection {
+    background: #E61919;
+    color: #EAEAEA;
+  }
+}
+
+/* ============================================================
+   UTILITY CLASSES — INDUSTRIAL DESIGN SYSTEM
+   ============================================================ */
+
+@layer components {
+
+  /* COMPARTMENT — replaces "card" */
+  .compartment {
+    background: #121212;
+    border: 1px solid #3A3A3A;
+    position: relative;
+  }
+
+  .compartment-header {
+    background: #181818;
+    border-bottom: 1px solid #3A3A3A;
+    padding: 6px 12px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #8A8A8A;
+  }
+
+  /* COMMAND BUTTON */
+  .cmd-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: transparent;
+    border: 1px solid #EAEAEA;
+    color: #EAEAEA;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 80ms linear, color 80ms linear;
+    text-decoration: none;
+  }
+
+  .cmd-btn:hover {
+    background: #EAEAEA;
+    color: #0A0A0A;
+  }
+
+  .cmd-btn-accent {
+    border-color: #E61919;
+    color: #E61919;
+  }
+
+  .cmd-btn-accent:hover {
+    background: #E61919;
+    color: #EAEAEA;
+  }
+
+  /* MONO LABEL */
+  .mono-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #8A8A8A;
+  }
+
+  /* STATUS INDICATOR */
+  .status-online::before {
+    content: "● ";
+    color: #4AF626;
+  }
+
+  .status-active::before {
+    content: "● ";
+    color: #E61919;
+  }
+
+  .status-offline::before {
+    content: "● ";
+    color: #8A8A8A;
+  }
+
+  /* STRUCTURAL SEPARATOR */
+  .separator-line {
+    width: 100%;
+    height: 1px;
+    background: #3A3A3A;
+  }
+
+  /* TELEMETRY GRID — gap creates visible lines */
+  .telemetry-grid {
+    display: grid;
+    gap: 1px;
+    background: #3A3A3A;
+  }
+
+  .telemetry-cell {
+    background: #121212;
+    padding: 12px 16px;
+  }
+
+  /* TECHNICAL HEADING */
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #E61919;
+    margin-bottom: 8px;
   }
 }

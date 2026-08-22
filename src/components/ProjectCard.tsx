@@ -1,166 +1,189 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowUpRight, Lock, Unlock } from "lucide-react";
 
 import Reveal from "@/components/Reveal";
 import ProjectDetailsModal from "@/components/ProjectDetailsModal";
 
 import { Project } from "@/data/projectsData";
 
-import { Badge } from "@/components/ui/badge";
-import { Card, CardHeader } from "@/components/ui/card";
-
 interface ProjectCardProps {
   project: Project;
   delay?: number;
 }
 
-export function ProjectCard({ project, delay }: ProjectCardProps) {
+export function ProjectCard({
+  project,
+  delay,
+}: ProjectCardProps) {
   const [open, setOpen] = useState(false);
+  const [hovered, setHovered] = useState(false);
 
   const isOpenSource = project.type === "open-source";
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
 
   return (
     <>
       <Reveal delay={delay ? delay / 1000 : 0}>
-        <Card
+        <article
           role="button"
           tabIndex={0}
-          onClick={() => setOpen(true)}
+          aria-label={`View details for ${project.title}`}
+          onClick={handleOpen}
           onKeyDown={(e) => {
             if (e.key === "Enter" || e.key === " ") {
               e.preventDefault();
-              setOpen(true);
+              handleOpen();
             }
           }}
-          className="
-            group
-            h-full
-            cursor-pointer
-            overflow-hidden
-            rounded-2xl
-            border-border/40
-            bg-card/30
-            backdrop-blur-sm
-            transition-all
-            duration-300
-            hover:-translate-y-2
-            hover:border-primary/30
-            hover:shadow-xl
-            focus:outline-none
-            focus:ring-2
-            focus:ring-primary/30
-          "
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)}
+          style={{
+            width: "100%",
+            height: "100%",
+            minHeight: 220,
+
+            display: "flex",
+            flexDirection: "column",
+
+            margin: 0,
+            padding: 0,
+
+            background: "#121212",
+
+            /*
+             * Important:
+             * Jangan gunakan border di sini.
+             * Grid parent yang mengatur separator.
+             */
+            boxShadow: hovered
+              ? "inset 0 0 0 1px #E61919"
+              : "none",
+
+            cursor: "pointer",
+
+            transition: "box-shadow 120ms ease",
+          }}
         >
-          <CardHeader className="flex h-full flex-col p-6">
-            <div className="space-y-4">
-              <Badge
-                variant="outline"
-                className="
-                  w-fit
-                  gap-1.5
-                  rounded-md
-                  border-border/50
-                  bg-transparent
-                  text-[10px]
-                  uppercase
-                  tracking-[0.2em]
-                  text-muted-foreground
-                "
-              >
-                {isOpenSource ? <Unlock size={12} /> : <Lock size={12} />}
-
-                {isOpenSource ? "Open Source" : "Proprietary"}
-              </Badge>
-
-              <h3
-                className="
-                  font-heading
-                  text-xl
-                  sm:text-2xl
-                  font-semibold
-                  leading-tight
-                  tracking-tight
-                  transition-transform
-                  duration-300
-                  group-hover:translate-x-[2px]
-                  line-clamp-1
-                "
-              >
-                {project.title}
-              </h3>
-
-              <p
-                className="
-                  text-sm
-                  sm:text-base
-                  leading-relaxed
-                  text-muted-foreground
-                  line-clamp-2
-                "
-              >
-                {project.shortDescription}
-              </p>
-            </div>
-
-            <div className="mt-auto pt-8">
-              <div
-                className="
-                  flex
-                  items-center
-                  justify-end
-                  gap-2
-                  text-sm
-                  text-muted-foreground
-                  transition-colors
-                  duration-300
-                  group-hover:text-foreground
-                "
-              >
-                <span>Explore Project</span>
-
-                <ArrowUpRight
-                  size={15}
-                  className="
-                    transition-transform
-                    duration-300
-                    group-hover:translate-x-[2px]
-                    group-hover:-translate-y-[2px]
-                  "
-                />
-              </div>
-            </div>
-          </CardHeader>
-
+          {/* CONTENT */}
           <div
-            className="
-              pointer-events-none
-              absolute
-              inset-0
-              opacity-0
-              transition-opacity
-              duration-500
-              group-hover:opacity-100
-            "
+            style={{
+              flex: 1,
+              display: "flex",
+              flexDirection: "column",
+
+              margin: 0,
+              padding: 20,
+            }}
           >
+            {/* TYPE */}
             <div
-              className="
-                absolute
-                right-0
-                top-0
-                h-32
-                w-32
-                rounded-full
-                bg-primary/10
-                blur-3xl
-              "
-            />
+              style={{
+                fontFamily: "'JetBrains Mono', monospace",
+                fontSize: 9,
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                color: isOpenSource
+                  ? "#6F6F6F"
+                  : "#555555",
+                marginBottom: 18,
+              }}
+            >
+              {isOpenSource
+                ? "Open Source"
+                : "Proprietary"}
+            </div>
+
+            {/* TITLE */}
+            <h3
+              style={{
+                margin: 0,
+
+                fontFamily: "'Inter', sans-serif",
+                fontWeight: 800,
+                fontSize:
+                  "clamp(1.2rem, 2vw, 1.5rem)",
+                lineHeight: 1.05,
+                letterSpacing: "-0.025em",
+
+                color: "#EAEAEA",
+                textTransform: "uppercase",
+              }}
+            >
+              {project.title}
+            </h3>
+
+            {/* DESCRIPTION */}
+            <p
+              style={{
+                margin: "14px 0 0 0",
+
+                fontFamily:
+                  "'JetBrains Mono', monospace",
+                fontSize: 11,
+                lineHeight: 1.75,
+
+                color: "#8A8A8A",
+                maxWidth: "55ch",
+              }}
+            >
+              {project.shortDescription}
+            </p>
+
+            {/* ACTION */}
+            <div
+              style={{
+                marginTop: "auto",
+                paddingTop: 24,
+
+                display: "flex",
+                alignItems: "center",
+                gap: 8,
+
+                fontFamily:
+                  "'JetBrains Mono', monospace",
+                fontSize: 10,
+                letterSpacing: "0.08em",
+                textTransform: "uppercase",
+
+                color: hovered
+                  ? "#E61919"
+                  : "#8A8A8A",
+
+                transition: "color 120ms ease",
+              }}
+            >
+              <span
+                aria-hidden="true"
+                style={{
+                  width: 18,
+                  height: 1,
+
+                  flexShrink: 0,
+
+                  background: hovered
+                    ? "#E61919"
+                    : "#555555",
+
+                  transition:
+                    "background 120ms ease, width 120ms ease",
+                }}
+              />
+
+              View project
+            </div>
           </div>
-        </Card>
+        </article>
       </Reveal>
 
-      <ProjectDetailsModal project={project} open={open} onOpenChange={setOpen} />
+      <ProjectDetailsModal
+        project={project}
+        open={open}
+        onOpenChange={setOpen}
+      />
     </>
   );
 }
