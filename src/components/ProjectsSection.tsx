@@ -1,176 +1,156 @@
-import HoverWords from "@/components/HoverWords";
 import Reveal from "@/components/Reveal";
-import { motion } from "framer-motion";
 import { projects } from "@/data/projectsData";
 import { ProjectCard } from "./ProjectCard";
 
 export default function ProjectsSection() {
-  const featuredProjects = projects.slice(0, Math.min(2, projects.length));
-  const remainingProjects = projects.slice(featuredProjects.length);
-
   return (
-    <section
-      id="projects"
-      className="
-        w-full
-        py-20
-        sm:py-24
-        lg:py-32
-      "
-    >
+    <section id="projects" className="w-full">
+      {/* TOP BORDER */}
       <div
-        className="
-          mx-auto
-          max-w-7xl
-          px-5
-          sm:px-8
-          lg:px-10
-        "
-      >
-        {/* Heading */}
-        <Reveal delay={0.2}>
-          <div>
+        style={{
+          height: 1,
+          background: "#3A3A3A",
+        }}
+      />
+
+      <div className="mx-auto max-w-7xl px-5 py-10 sm:px-8 sm:py-14 lg:px-10 lg:py-20">
+        {/* SECTION LABEL */}
+        <Reveal delay={0.05}>
+          <div
+            style={{
+              fontFamily:
+                "'JetBrains Mono', monospace",
+              fontSize: 10,
+              letterSpacing: "0.12em",
+              color: "#6F6F6F",
+              textTransform: "uppercase",
+              marginBottom: 24,
+            }}
+          >
+            Selected Work
+          </div>
+        </Reveal>
+
+        {/* HEADING */}
+        <Reveal delay={0.1}>
+          <div
+            style={{
+              marginBottom: 40,
+            }}
+          >
             <h2
-              className="
-                font-heading
-                text-3xl
-                sm:text-4xl
-                lg:text-5xl
-                font-bold
-                tracking-tight
-                text-foreground
-              "
+              style={{
+                fontFamily: "'Inter', sans-serif",
+                fontWeight: 900,
+                textTransform: "uppercase",
+                letterSpacing: "-0.045em",
+                lineHeight: 0.9,
+                fontSize:
+                  "clamp(2.8rem, 6vw, 5rem)",
+                color: "#EAEAEA",
+                margin: 0,
+                marginBottom: 20,
+              }}
             >
               Projects
             </h2>
 
             <p
-              className="
-                mt-3
-                max-w-2xl
-                text-sm
-                sm:text-base
-                leading-relaxed
-                text-muted-foreground
-              "
+              style={{
+                fontFamily:
+                  "'JetBrains Mono', monospace",
+                fontSize: 12,
+                lineHeight: 1.8,
+                color: "#8A8A8A",
+                maxWidth: "58ch",
+                margin: 0,
+              }}
             >
-              <HoverWords>
-                These are the things I&apos;ve built, ranging from open-source tools to proprietary
-                systems and long-term personal projects.
-              </HoverWords>
+              A selection of things I&apos;ve built,
+              experimented with, and worked on over
+              time.
             </p>
           </div>
         </Reveal>
 
-        <div className="mt-10">
-          {/* Top Row */}
+        {/* PROJECT COUNT */}
+        <Reveal delay={0.15}>
           <div
-            className="
-              grid
-              grid-cols-1
-              lg:grid-cols-3
-              gap-6
-              items-start
-            "
+            style={{
+              marginBottom: 8,
+
+              fontFamily:
+                "'JetBrains Mono', monospace",
+              fontSize: 9,
+              letterSpacing: "0.08em",
+              color: "#555555",
+              textTransform: "lowercase",
+            }}
           >
-            {/* Featured Projects */}
-            <div className="lg:col-span-2">
-              <div
-                className={`
-                  grid
-                  gap-6
-                  ${featuredProjects.length === 1 ? "grid-cols-1" : "grid-cols-1 sm:grid-cols-2"}
-                `}
-              >
-                {featuredProjects.map((project, index) => (
-                  <ProjectCard key={project.id} project={project} delay={index * 100} />
-                ))}
-              </div>
-            </div>
-
-            {/* Illustration */}
-            <div
-              className="
-                hidden
-                lg:flex
-                justify-center
-                items-start
-                select-none
-              "
-            >
-              <Reveal delay={0.3}>
-                <motion.div
-                  initial={{
-                    opacity: 0,
-                    x: 30,
-                  }}
-                  whileInView={{
-                    opacity: 1,
-                    x: 0,
-                  }}
-                  viewport={{
-                    once: true,
-                    amount: 0.2,
-                  }}
-                  transition={{
-                    duration: 0.8,
-                  }}
-                  className="flex justify-center"
-                >
-                  <motion.img
-                    src="/assets/image/others/projects.png"
-                    alt="Projects Illustration"
-                    draggable={false}
-                    onDragStart={(e) => e.preventDefault()}
-                    onContextMenu={(e) => e.preventDefault()}
-                    animate={{
-                      y: [0, -6, 0],
-                    }}
-                    transition={{
-                      duration: 6,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
-                    className="
-                      w-[200px]
-                      xl:w-[240px]
-                      h-auto
-                      object-contain
-                      pointer-events-none
-                      select-none
-                      [-webkit-user-drag:none]
-                    "
-                  />
-                </motion.div>
-              </Reveal>
-            </div>
+            {projects.length}{" "}
+            {projects.length === 1
+              ? "project"
+              : "projects"}
           </div>
+        </Reveal>
 
-          {/* Remaining Projects */}
-          {remainingProjects.length > 0 && (
+        {/* PROJECT GRID */}
+        <div
+          style={{
+            display: "grid",
+
+            gridTemplateColumns:
+              "repeat(auto-fit, minmax(280px, 1fr))",
+
+            /*
+             * IMPORTANT:
+             * No gap. Separator comes from the grid itself.
+             */
+            gap: 0,
+
+            width: "100%",
+
+            background: "#3A3A3A",
+
+            border: "1px solid #3A3A3A",
+
+            /*
+             * Prevent grid overflow from creating
+             * accidental visual gaps.
+             */
+            overflow: "hidden",
+          }}
+        >
+          {projects.map((project, index) => (
             <div
-              className="
-                mt-6
+              key={project.id}
+              style={{
+                minWidth: 0,
+                minHeight: 0,
 
-                grid
-                gap-6
+                width: "100%",
+                height: "100%",
 
-                grid-cols-1
+                margin: 0,
+                padding: 0,
 
-                sm:grid-cols-2
+                display: "flex",
 
-                lg:[grid-template-columns:repeat(auto-fit,minmax(320px,1fr))]
-              "
+                /*
+                 * This is the actual separator.
+                 */
+                borderRight: "1px solid #3A3A3A",
+                borderBottom: "1px solid #3A3A3A",
+
+                background: "#121212",
+              }}
             >
-              {remainingProjects.map((project, index) => (
-                <ProjectCard
-                  key={project.id}
-                  project={project}
-                  delay={(index + featuredProjects.length) * 100}
-                />
-              ))}
+              <ProjectCard
+                project={project}
+                delay={index * 80}
+              />
             </div>
-          )}
+          ))}
         </div>
       </div>
     </section>

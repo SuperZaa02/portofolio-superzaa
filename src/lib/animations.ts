@@ -1,18 +1,22 @@
 import type { Variants } from "framer-motion";
 
+/* ============================================================
+   ANIMATIONS — MECHANICAL / INDUSTRIAL
+   No bounce, no elastic, no float.
+   Fast, utilitarian, purposeful.
+   ============================================================ */
+
 export const fadeInUp: Variants = {
   hidden: {
     opacity: 0,
-    y: 40,
-    scale: 0.98,
+    y: 12,
   },
   visible: {
     opacity: 1,
     y: 0,
-    scale: 1,
     transition: {
-      duration: 0.7,
-      ease: [0.25, 0.1, 0.25, 1],
+      duration: 0.35,
+      ease: [0.0, 0.0, 0.2, 1], // linear-fast ease-out
     },
   },
 };
@@ -21,7 +25,7 @@ export const container = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.15,
+      staggerChildren: 0.08,
     },
   },
 };
@@ -29,21 +33,22 @@ export const container = {
 export const modal: Variants = {
   hidden: {
     opacity: 0,
-    scale: 0.95,
+    y: -8,
   },
   visible: {
     opacity: 1,
-    scale: 1,
+    y: 0,
     transition: {
-      duration: 0.18,
-      ease: [0.22, 1, 0.36, 1],
+      duration: 0.15,
+      ease: [0.0, 0.0, 0.2, 1],
     },
   },
   exit: {
     opacity: 0,
-    scale: 0.95,
+    y: -4,
     transition: {
-      duration: 0.12,
+      duration: 0.1,
+      ease: "linear",
     },
   },
 };

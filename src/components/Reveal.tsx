@@ -11,9 +11,13 @@ type RevealProps = {
   style?: React.CSSProperties;
 };
 
+/* ============================================================
+   REVEAL — MECHANICAL ENTRY
+   No scale, no bounce. Fade + small Y offset, fast linear.
+   ============================================================ */
 export default function Reveal({ children, className, delay = 0, style }: RevealProps) {
   const ref = useRef<HTMLDivElement | null>(null);
-  const isInView = useInView(ref, { amount: 0.2 });
+  const isInView = useInView(ref, { amount: 0.15 });
 
   return (
     <motion.div
@@ -23,10 +27,10 @@ export default function Reveal({ children, className, delay = 0, style }: Reveal
       variants={fadeInUp}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: false, amount: 0.2 }}
+      viewport={{ once: true, amount: 0.15 }}
       animate={isInView ? "visible" : "hidden"}
       custom={delay}
-      transition={{ duration: 0.7, delay }}
+      transition={{ duration: 0.35, delay, ease: [0.0, 0.0, 0.2, 1] }}
     >
       {children}
     </motion.div>

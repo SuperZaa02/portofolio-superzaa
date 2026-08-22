@@ -5,6 +5,12 @@ interface HoverWordsProps {
   children: React.ReactNode;
 }
 
+/* ============================================================
+   HOVER WORDS — MECHANICAL HIGHLIGHT
+   No glow, no scale, no spring bounce.
+   Hard color inversion: muted → foreground.
+   ============================================================ */
+
 function wrapWords(text: string) {
   return text.split(/(\s+)/).map((part, index) => {
     if (/^\s+$/.test(part)) {
@@ -14,26 +20,13 @@ function wrapWords(text: string) {
     return (
       <motion.span
         key={index}
-        className="
-          inline-block
-          cursor-default
-          transition-colors
-          duration-200
-          will-change-transform
-        "
+        className="inline-block cursor-default"
         whileHover={{
-          y: -2,
-          scale: 1.03,
-          color: "#000000",
-          textShadow: `
-            0 0 8px hsl(var(--primary) / 0.5),
-            0 0 16px hsl(var(--primary) / 0.3)
-          `,
+          color: "#EAEAEA",
         }}
         transition={{
-          type: "spring",
-          stiffness: 500,
-          damping: 15,
+          duration: 0.08,
+          ease: "linear",
         }}
       >
         {part}

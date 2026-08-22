@@ -1,189 +1,187 @@
 import pkg from "../../package.json";
-import { motion } from "framer-motion";
-import { fadeInUp } from "@/lib/animations";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import VersionModal from "./VersionModal";
 
 const buildVersion = "v" + pkg.version + "+" + __BUILD_ID__;
 
 export default function FooterSection() {
   const [versionModalOpen, setVersionModalOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const updateLayout = () => {
+      setIsMobile(window.innerWidth <= 520);
+    };
+
+    updateLayout();
+    window.addEventListener("resize", updateLayout);
+
+    return () => {
+      window.removeEventListener("resize", updateLayout);
+    };
+  }, []);
 
   return (
-    <motion.footer
-      variants={fadeInUp}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true }}
-      custom={0.8}
-      className="pb-8"
+    <footer
+      style={{
+        width: "100%",
+        padding: 0,
+        margin: 0,
+      }}
     >
-      <div className="mx-auto max-w-7xl px-6">
-        <motion.div
-          className="
-            relative
-            overflow-hidden
-            rounded-3xl
+      {/* TOP BORDER */}
+      <div
+        style={{
+          width: "100%",
+          height: 1,
+          background: "#3A3A3A",
+        }}
+      />
 
-            border
-            border-white/[0.05]
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: isMobile
+            ? "1fr"
+            : "minmax(0, 1fr) auto minmax(0, 1fr)",
+          gridTemplateRows: isMobile ? "auto auto auto" : "auto",
+          alignItems: "center",
+          gap: isMobile ? 10 : 24,
+          width: "100%",
+          boxSizing: "border-box",
+          padding: isMobile ? "12px 14px" : "12px 24px",
+          background: "#0A0A0A",
+        }}
+      >
+        {/* COORDINATES */}
+        <button
+          type="button"
+          onClick={() =>
+            window.open(
+              "https://www.google.com/search?q=6%C2%B0LU-11%C2%B0LS%20&%2095%C2%B0BT-141%C2%B0BT",
+              "_blank",
+              "noopener,noreferrer",
+            )
+          }
+          style={{
+            gridColumn: isMobile ? "1" : "1",
+            gridRow: isMobile ? "1" : "1",
+            justifySelf: "start",
+            width: isMobile ? "100%" : "auto",
+            minWidth: 0,
 
-            bg-background/20
+            background: "transparent",
+            border: "none",
+            outline: "none",
+            cursor: "pointer",
+            padding: 0,
+            margin: 0,
 
-            backdrop-blur-[24px]
-            backdrop-saturate-[180%]
+            textAlign: "left",
+            whiteSpace: isMobile ? "normal" : "nowrap",
 
-            shadow-[0_8px_30px_rgba(0,0,0,0.08)]
-          "
+            fontFamily: "'JetBrains Mono', monospace",
+            fontSize: isMobile ? 9 : 10,
+            lineHeight: 1.4,
+            letterSpacing: isMobile ? "0.08em" : "0.1em",
+            color: "#8A8A8A",
+            textTransform: "uppercase",
+
+            transition: "color 80ms linear",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.color = "#EAEAEA";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.color = "#8A8A8A";
+          }}
         >
-          {/* Top highlight */}
-          <div
-            className="
-              pointer-events-none
-              absolute
-              inset-x-0
-              top-0
-              h-px
+          LAT / 6°N–11°S <span>&nbsp;</span> LON / 95°E–141°E
+        </button>
 
-              bg-gradient-to-r
-              from-transparent
-              via-white/20
-              to-transparent
-            "
-          />
+        {/* COPYRIGHT */}
+        <span
+          style={{
+            gridColumn: isMobile ? "1" : "2",
+            gridRow: isMobile ? "3" : "1",
 
-          {/* Glass reflection */}
-          <div
-            className="
-              pointer-events-none
-              absolute
-              inset-0
+            justifySelf: isMobile ? "center" : "center",
 
-              bg-gradient-to-br
-              from-white/[0.05]
-              via-transparent
-              to-transparent
-            "
-          />
+            width: isMobile ? "100%" : "auto",
+            minWidth: 0,
 
-          {/* Soft glow */}
-          <div
-            className="
-              pointer-events-none
-              absolute
-              -top-20
-              left-1/2
+            fontFamily: "'JetBrains Mono', monospace",
+            fontSize: isMobile ? 9 : 10,
+            lineHeight: 1.4,
+            letterSpacing: isMobile ? "0.08em" : "0.1em",
+            color: "#8A8A8A",
+            textTransform: "uppercase",
+            textAlign: "center",
+            whiteSpace: isMobile ? "normal" : "nowrap",
 
-              h-40
-              w-40
+            paddingTop: isMobile ? 2 : 0,
+          }}
+        >
+          &copy; {new Date().getUTCFullYear()} Faeza Raziq
+        </span>
 
-              -translate-x-1/2
-              rounded-full
+        {/* VERSION */}
+        <button
+          type="button"
+          onClick={() => setVersionModalOpen(true)}
+          style={{
+            gridColumn: isMobile ? "1" : "3",
+            gridRow: isMobile ? "2" : "1",
 
-              bg-primary/10
-              blur-3xl
-            "
-          />
+            justifySelf: isMobile ? "end" : "end",
 
-          <div
-            className="
-              relative
+            width: isMobile ? "auto" : "100%",
+            minWidth: 0,
 
-              grid
-              grid-cols-2
-              items-center
-              gap-y-3
+            background: "transparent",
+            border: "none",
+            outline: "none",
+            cursor: "pointer",
+            padding: 0,
+            margin: 0,
 
-              px-6
-              py-4
+            textAlign: "right",
+            whiteSpace: "nowrap",
 
-              sm:flex
-              sm:flex-row
-              sm:justify-between
-              sm:gap-y-0
-            "
-          >
-            {/* Copyright */}
-            <p
-              className="
-                col-span-2
+            fontFamily: "'JetBrains Mono', monospace",
+            fontSize: isMobile ? 9 : 10,
+            lineHeight: 1.4,
+            letterSpacing: isMobile ? "0.08em" : "0.1em",
+            color: "#8A8A8A",
+            textTransform: "uppercase",
 
-                text-center
-                text-xs
-
-                text-muted-foreground
-
-                transition-colors
-                duration-300
-
-                hover:text-foreground
-
-                sm:order-2
-                sm:flex-1
-              "
-            >
-              &copy; {new Date().getUTCFullYear()} Faeza Raziq
-            </p>
-
-            {/* Coordinates */}
-            <div className="text-left sm:order-1 sm:flex-1">
-              <span
-                onClick={() =>
-                  window.open(
-                    "https://www.google.com/search?q=6%C2%B0LU-11%C2%B0LS%20&%2095%C2%B0BT-141%C2%B0BT",
-                    "_blank",
-                  )
-                }
-                className="
-                  inline-block
-                  cursor-pointer
-
-                  font-mono
-                  text-[10px]
-                  sm:text-[11px]
-
-                  text-muted-foreground
-
-                  transition-all
-                  duration-300
-
-                  hover:text-foreground
-                  hover:tracking-wide
-                "
-              >
-                6&deg;LU-11&deg;LS & 95&deg;BT-141&deg;BT
-              </span>
-            </div>
-
-            {/* Version */}
-            <div className="text-right sm:order-3 sm:flex-1">
-              <span
-                onClick={() => setVersionModalOpen(true)}
-                className="
-                  inline-block
-                  cursor-pointer
-
-                  font-mono
-                  text-[10px]
-                  sm:text-[11px]
-
-                  text-muted-foreground
-
-                  transition-all
-                  duration-300
-
-                  hover:text-foreground
-                  hover:tracking-wide
-                "
-              >
-                {buildVersion}
-              </span>
-            </div>
-
-            <VersionModal open={versionModalOpen} onOpenChange={setVersionModalOpen} />
-          </div>
-        </motion.div>
+            transition: "color 80ms linear",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.color = "#EAEAEA";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.color = "#8A8A8A";
+          }}
+        >
+          REV / {buildVersion}
+        </button>
       </div>
-    </motion.footer>
+
+      {/* BOTTOM RED MARKER */}
+      <div
+        style={{
+          width: "100%",
+          height: 2,
+          background: "#E61919",
+          opacity: 0.6,
+        }}
+      />
+
+      <VersionModal
+        open={versionModalOpen}
+        onOpenChange={setVersionModalOpen}
+      />
+    </footer>
   );
 }

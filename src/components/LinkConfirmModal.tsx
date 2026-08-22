@@ -1,3 +1,5 @@
+"use client";
+
 import { motion } from "framer-motion";
 import { ExternalLink } from "lucide-react";
 
@@ -9,8 +11,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-
-import { Button } from "@/components/ui/button";
 
 import type { SocialLink } from "@/data/socialsData";
 
@@ -39,130 +39,132 @@ export default function LinkConfirmModal({
       }}
     >
       <DialogContent
-        className="
-          sm:max-w-sm
-          border-border/40
-          bg-background/95
-          p-0
-          backdrop-blur-xl
-          overflow-hidden
-        "
+        style={{
+          maxWidth: 400,
+          padding: 0,
+          background: "#121212",
+          border: "1px solid #3A3A3A",
+          borderRadius: 0,
+          boxShadow: "none",
+        }}
       >
         <motion.div
-          initial={{
-            opacity: 0,
-            y: 12,
-            scale: 0.98,
-          }}
-          animate={{
-            opacity: 1,
-            y: 0,
-            scale: 1,
-          }}
-          transition={{
-            duration: 0.2,
-            ease: "easeOut",
-          }}
-          className="p-5"
+          initial={{ opacity: 0, y: -6 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.15 }}
         >
-          <DialogHeader className="space-y-2 text-left">
-            <DialogTitle
-              className="
-                font-heading
-                text-lg
-                font-semibold
-                tracking-tight
-              "
-            >
-              Open {link.platform}?
-            </DialogTitle>
-
-            <DialogDescription
-              className="
-                text-sm
-                text-muted-foreground
-              "
-            >
-              You are about to leave this website.
-            </DialogDescription>
-          </DialogHeader>
-
+          {/* ACCENT LINE */}
           <div
-            className="
-              mt-4
-              flex
-              items-center
-              gap-3
-              rounded-lg
-              border
-              border-border/40
-              px-3
-              py-2.5
-            "
-          >
-            <Icon size={15} className="text-muted-foreground" />
+            style={{
+              height: 3,
+              background: "#E61919",
+            }}
+          />
 
-            <span
-              className="
-                truncate
-                text-sm
-                text-foreground
-              "
+          <div style={{ padding: "22px" }}>
+            <DialogHeader
+              style={{
+                textAlign: "left",
+                marginBottom: 20,
+              }}
             >
-              {link.label}
-            </span>
-          </div>
+              <DialogTitle
+                style={{
+                  margin: 0,
+                  fontFamily: "'Inter', sans-serif",
+                  fontWeight: 800,
+                  fontSize: 16,
+                  letterSpacing: "-0.02em",
+                  color: "#EAEAEA",
+                }}
+              >
+                Open external link?
+              </DialogTitle>
 
-          <DialogFooter
-            className="
-              mt-5
-              flex-row
-              justify-end
-              gap-2
-            "
-          >
-            <Button
-              variant="ghost"
-              onClick={onCancel}
-              className="
-                rounded-lg
-                text-muted-foreground
-                transition-all
-                duration-200
+              <DialogDescription
+                style={{
+                  marginTop: 8,
+                  fontFamily: "'JetBrains Mono', monospace",
+                  fontSize: 11,
+                  lineHeight: 1.7,
+                  color: "#8A8A8A",
+                }}
+              >
+                This will open {link.platform} in a new tab.
+              </DialogDescription>
+            </DialogHeader>
 
-                hover:text-foreground
-                hover:bg-muted/40
-              "
+            {/* LINK */}
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 10,
+                padding: "11px 12px",
+                border: "1px solid #3A3A3A",
+                background: "#181818",
+                marginBottom: 20,
+              }}
             >
-              Cancel
-            </Button>
-
-            <Button
-              onClick={onConfirm}
-              className="
-                group
-                gap-2
-                rounded-lg
-
-                transition-all
-                duration-200
-
-                hover:shadow-md
-                hover:translate-y-[-1px]
-              "
-            >
-              Continue
-              <ExternalLink
+              <Icon
                 size={14}
-                className="
-                  transition-transform
-                  duration-200
-                  group-hover:translate-x-[2px]
-                  group-hover:-translate-y-[2px]
-                "
+                style={{
+                  color: "#8A8A8A",
+                  flexShrink: 0,
+                }}
               />
-            </Button>
-          </DialogFooter>
+
+              <span
+                style={{
+                  minWidth: 0,
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  whiteSpace: "nowrap",
+                  fontFamily: "'JetBrains Mono', monospace",
+                  fontSize: 11,
+                  color: "#EAEAEA",
+                }}
+              >
+                {link.label}
+              </span>
+            </div>
+
+            {/* ACTIONS */}
+            <DialogFooter
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "flex-end",
+                gap: 8,
+              }}
+            >
+              <button
+                type="button"
+                onClick={onCancel}
+                className="cmd-btn"
+                style={{
+                  fontSize: 10,
+                }}
+              >
+                Cancel
+              </button>
+
+              <button
+                type="button"
+                onClick={onConfirm}
+                className="cmd-btn cmd-btn-accent"
+                style={{
+                  fontSize: 10,
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 7,
+                }}
+              >
+                Open Link
+                <ExternalLink size={11} />
+              </button>
+            </DialogFooter>
+          </div>
         </motion.div>
       </DialogContent>
     </Dialog>

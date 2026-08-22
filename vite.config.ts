@@ -1,4 +1,5 @@
 import { defineConfig } from "vite";
+import { visualizer } from "rollup-plugin-visualizer";
 import react from "@vitejs/plugin-react-swc";
 import svgr from "vite-plugin-svgr";
 import vike from "vike/plugin";
@@ -30,7 +31,18 @@ export default defineConfig({
       overlay: false,
     },
   },
-  plugins: [react(), vike(), svgr()],
+  plugins: [
+    react(),
+    vike(),
+    svgr(),
+    visualizer({
+      filename: "./dist/stats.html",
+      open: true,
+      gzipSize: true,
+      brotliSize: true,
+      template: "treemap",
+    })
+  ],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
